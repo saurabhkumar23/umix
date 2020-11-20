@@ -9,6 +9,7 @@ const Signup = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
+    // api call to backend
     const submitData = () => {
         fetch("/signup",{
             method : "post",

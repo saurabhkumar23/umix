@@ -1,13 +1,17 @@
-import React,{useState} from 'react'
+import React,{useState,useContext} from 'react'
 import {Link,useHistory} from 'react-router-dom';
 import M from 'materialize-css'
+import {UserContext} from '../../App'
 
 const Login = () => {
+
+    const {state,dispatch} = useContext(UserContext)
 
     const history = useHistory()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
+    // api call to backend
     const submitData = () => {
         fetch("/signin",{
             method : "post",
@@ -24,6 +28,7 @@ const Login = () => {
             else{
                 localStorage.setItem("jwt",data.token)
                 localStorage.setItem("user",JSON.stringify(data.user))
+                dispatch({type:'USER',payload:data.user})                //update user state from null to user's data
                 M.toast({html: `Welcome ${data.user.name}`,classes:"#2e7d32 green darken-3"})
                 history.push('/')
             }

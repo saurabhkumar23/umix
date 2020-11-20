@@ -10,6 +10,7 @@ const CreatePost = () => {
     const [image, setImage] = useState('')
     const [url,setUrl] = useState('')
 
+    // api call to backend
     useEffect(() => {
         if(url){
             fetch("/createPost",{
@@ -34,6 +35,7 @@ const CreatePost = () => {
         }
     },[url])
 
+    // submit image data to cloudinary and get the url back for posting data to DB
     const postDetails = () => {
         const data = new FormData()
         data.append('file',image)
