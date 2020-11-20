@@ -47,7 +47,7 @@ const Login = () => {
                     />
                 </div>
                 <div className="input-field">
-                    <input type="text" placeholder="Password"
+                    <input type="password" placeholder="Password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
