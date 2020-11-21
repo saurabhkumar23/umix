@@ -39,6 +39,45 @@ router.post('/createPost',requireLogin,(req,res) => {
     .catch((error) => res.status(404).json({error : error}))
 })
 
+//UPDATE LIKES on a post
+router.put('/like',requireLogin,(req,res) => {
+    Post.findByIdAndUpdate(req.body.postId,{
+        $push : {likes : req.user._id}
+    },{new:true})
+    .exec((error,result) => {
+        if(error)
+            return res.status(422).json({error : error})
+        return res.json(result)
+    })
+})
+
+//UPDATE LIKES on a post
+router.put('/unlike',requireLogin,(req,res) => {
+    Post.findByIdAndUpdate(req.body.postId,{
+        $pull : {likes : req.user._id}
+    },{new:true})
+    .exec((error,result) => {
+        if(error)
+            return res.status(422).json({error : error})
+        return res.json(result)
+    })
+})
+
+
+
+
+
+
+
+
+
+
+
+
 
 ///////////// export //////////////////
 module.exports = router
+
+
+
+
