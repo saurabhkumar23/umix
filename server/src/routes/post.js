@@ -20,6 +20,7 @@ router.get('/showMyPost',requireLogin,(req,res) => {
 router.get('/showAllPost',requireLogin,(req,res) => {
     Post.find()
     .populate('postedBy','_id name')
+    .populate('comments.postedBy','_id name')
     .then((posts) => res.json({posts}))
     .catch((error) => res.status(404).json({error : error}))
 })
@@ -44,6 +45,8 @@ router.put('/like',requireLogin,(req,res) => {
     Post.findByIdAndUpdate(req.body.postId,{
         $push : {likes : req.user._id}
     },{new:true})
+    .populate('comments.postedBy','_id name')
+    .populate('postedBy','_id name')
     .exec((error,result) => {
         if(error)
             return res.status(422).json({error : error})
@@ -56,6 +59,8 @@ router.put('/unlike',requireLogin,(req,res) => {
     Post.findByIdAndUpdate(req.body.postId,{
         $pull : {likes : req.user._id}
     },{new:true})
+    .populate('comments.postedBy','_id name')
+    .populate('postedBy','_id name')
     .exec((error,result) => {
         if(error)
             return res.status(422).json({error : error})
@@ -63,15 +68,40 @@ router.put('/unlike',requireLogin,(req,res) => {
     })
 })
 
+//UPDATE COMMENTS on a post
+router.put('/comment',requireLogin,(req,res) => {
+    const comment = {
+        text : req.body.text,
+        postedBy : req.user._id
+    }
+    Post.findByIdAndUpdate(req.body.postId,{
+        $push : {comments : comment}
+    },{new:true})
+    .populate('comments.postedBy','_id name')
+    .populate('postedBy','_id name')
+    .exec((error,result) => {
+        if(error)
+            return res.status(422).json({error : error})
+        return res.json(result)
+    })
+})
 
-
-
-
-
-
-
-
-
+//DELETE a post
+router.delete('/deletePost/:postId',requireLogin,(req,res) => {
+    Post.findOne({_id:req.params.postId})
+    .populate('postedBy','_id')
+    .exec((error,post) => {
+        if(error)
+            return res.status(422).json({error:error})
+        if(post.postedBy._id.toString() === req.user._id.toString()){
+            post.remove()
+            .then(result => {
+                return res.json(result)
+            })
+            .catch((error) => res.status(404).json({error : error}))
+        }
+    })
+})
 
 
 

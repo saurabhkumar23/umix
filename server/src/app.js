@@ -12,7 +12,8 @@ mongoose.connect(MONGO_URI,{useNewUrlParser: true,useUnifiedTopology: true})
 //////////////////// routes configuration /////////////////
 app.use(express.json())
 app.use(require('./routes/auth'))
-app.use(require('./routes/post'))
+app.use(require('./routes/post')) 
+app.use(require('./routes/user'))
 
 ///////////////////////// listen to server //////////////////
 const PORT = 5000;
