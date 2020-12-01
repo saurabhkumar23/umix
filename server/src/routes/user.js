@@ -64,5 +64,17 @@ router.put('/unfollow',requireLogin,(req,res) => {
     })
 })
 
+//UPDATE profile pic event
+router.put('/updatePhoto',requireLogin,(req,res) => {
+    User.findByIdAndUpdate(req.user._id,{
+        $set : {photo : req.body.photo}
+    },{new:true})
+    .exec((error,result) => {
+        if(error)
+            return res.status(422).json({error : error})
+        return res.json(result)
+    })
+})
+
 ///////////// export //////////////////
 module.exports = router

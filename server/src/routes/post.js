@@ -25,15 +25,6 @@ router.get('/showAllPost',requireLogin,(req,res) => {
     .catch((error) => res.status(404).json({error : error}))
 })
 
-//SHOW ALL POST whom i follow
-// router.get('/showSubPost',requireLogin,(req,res) => {
-//     Post.find({postedBy : {$in:req.user.following}})
-//     .populate('postedBy','_id name')
-//     .populate('comments.postedBy','_id name')
-//     .then((posts) => res.json({posts}))
-//     .catch((error) => res.status(404).json({error : error}))
-// })
-
 //CREATE POST
 router.post('/createPost',requireLogin,(req,res) => {
     //fetch data

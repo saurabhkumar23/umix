@@ -21,8 +21,8 @@ module.exports = (req,res,next) => {
         User.findById(_id)
         .then((user) => {
             req.user = user
-            //console.log('verify ho gya bhai')
             next();
         })
+        .catch((error) => console.log(error))
     })
 }

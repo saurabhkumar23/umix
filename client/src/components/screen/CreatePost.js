@@ -10,7 +10,7 @@ const CreatePost = () => {
     const [image, setImage] = useState('')
     const [url,setUrl] = useState('')
 
-    // api call to backend
+    // api call to create a post
     useEffect(() => {
         if(url){
             fetch("/createPost",{

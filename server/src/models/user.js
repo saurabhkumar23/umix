@@ -26,7 +26,10 @@ const userSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref : 'user'
         }
-    ]
+    ],
+    photo : {
+        type : String,
+    }
 },{timestamps:true})
 
 ///////////// export //////////////////

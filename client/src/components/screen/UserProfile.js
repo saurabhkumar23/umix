@@ -8,7 +8,6 @@ const UserProfile = () => {
 
     const history = useHistory()
     const [userProfile,setUserProfile] = useState(null)
-    const [showFollow,setShowFollow] = useState(true)
     const {state,dispatch} = useContext(UserContext)
     const {userid} = useParams()
 
@@ -28,7 +27,6 @@ const UserProfile = () => {
             }
             else{
                 setUserProfile(result)
-                console.log(state)
             }
         })
     },[])
@@ -54,7 +52,6 @@ const UserProfile = () => {
                 setUserProfile((prevstate) => {
                     return {...prevstate,user:{...prevstate.user,followers:[...prevstate.user.followers,result._id]}}
                 })
-                setShowFollow(false)
             }
         })
         .catch((error) => console.log(error))
@@ -95,14 +92,14 @@ const UserProfile = () => {
                     <div className="main-profile-container">
                         <div className="profile-head">
                             <div>
-                                <img src="https://images.unsplash.com/photo-1550927407-50e2bd128b81?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"/>
+                                <img src={userProfile.user.photo}/>
                             </div>
                             <div>
                                 <h4>{userProfile.user.name}</h4>
                                 <h6>{userProfile.user.email}</h6>
                                 <div style={{marginTop:'20px'}}>
                                     {
-                                        showFollow
+                                        !state.following.includes(userid)
                                         ?   <button onClick={followUser} className="btn waves-effect waves-light #64b5f6 blue darken-2">Follow</button>
                                         :   <button onClick={unfollowUser} className="btn waves-effect waves-light #64b5f6 blue darken-2">unFollow</button>  
                                     }

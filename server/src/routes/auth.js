@@ -12,7 +12,7 @@ const router = express.Router()
 // SIGNUP 
 router.post('/signup',(req,res) => {
     //fetching data
-    const {name,email,password} = req.body
+    const {name,email,password,photo} = req.body
     //validation
     if(!name || !email || !password){
         return res.status(404).json({'error' : 'Please fill all the fields!'})
@@ -27,7 +27,7 @@ router.post('/signup',(req,res) => {
         //saving user to DB
         bcrypt.hash(password,12)
         .then((hashedPassword) => {
-            const newUser = new User({name,email,password : hashedPassword})
+            const newUser = new User({name,email,password : hashedPassword,photo})
             newUser.save()
             .then((user) => res.json({message : 'User register successfully!'}))
             .catch((error) => res.status(404).json({error : error}))
@@ -58,8 +58,8 @@ router.post('/signin',(req,res) => {
             if(isMatch){
                 //user receive the token
                 const token = jwt.sign({_id:user._id},JWT_SECRET_KEY,{expiresIn:'1hr'})
-                const {_id,name,email,followers,following} = user
-                return res.json({token,user:{_id,name,email,followers,following}})
+                const {_id,name,email,followers,following,photo} = user
+                return res.json({token,user:{_id,name,email,followers,following,photo}})
             }
             else
                 return res.status(401).json({error : 'Invalid email or password!'})
