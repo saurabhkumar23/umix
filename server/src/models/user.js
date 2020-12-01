@@ -14,7 +14,19 @@ const userSchema = new mongoose.Schema({
     password : {
         type : String,
         required : true
-    }
+    },
+    followers : [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref : 'user'
+        }
+    ],
+    following : [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref : 'user'
+        }
+    ]
 },{timestamps:true})
 
 ///////////// export //////////////////

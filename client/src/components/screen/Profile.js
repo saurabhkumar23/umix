@@ -20,28 +20,39 @@ const Profile = () => {
     },[])
 
     return (
-        <section className="profile">
-            <div className="main-profile-container">
-                <div className="profile-head">
-                    <div>
-                        <img src="https://images.unsplash.com/photo-1550927407-50e2bd128b81?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"/>
-                    </div>
-                    <div>
-                        <h4>{state ? state.name : "loading"}</h4>
-                        <div className="profile-info">
-                            <h5>{posts.length}</h5>
-                            <h5>20 Followers</h5>
-                            <h5>30 Following</h5>
+        <>
+            {
+                state 
+                ? 
+                <section className="profile">
+                    <div className="main-profile-container">
+                        <div className="profile-head">
+                            <div>
+                                <img src="https://images.unsplash.com/photo-1550927407-50e2bd128b81?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"/>
+                            </div>
+                            <div>
+                                <h4>{state.name}</h4>
+                                <h6>{state.email}</h6>
+                                <div className="profile-info">
+                                    <h5>{posts.length} Posts</h5>
+                                    <h5>{state.followers.length} Followers</h5>
+                                    <h5>{state.following.length} Following</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="profile-gallery">
+                            {
+                                posts.map((post) => <img key={post._id} src={post.photo} alt={post.title}/>)
+                            }
                         </div>
                     </div>
-                </div>
-                <div className="profile-gallery">
-                    {
-                        posts.map((post) => <img key={post._id} src={post.photo} alt={post.title}/>)
-                    }
-                </div>
-            </div>
-        </section>
+                </section>
+                :
+                <h1>Loading...!</h1>
+            }
+        </>
+        
+        
     );
 }
 
