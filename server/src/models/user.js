@@ -29,7 +29,9 @@ const userSchema = new mongoose.Schema({
     ],
     photo : {
         type : String,
-    }
+    },
+    resetToken : String,
+    expireToken : Date
 },{timestamps:true})
 
 ///////////// export //////////////////

@@ -53,6 +53,8 @@ const Login = () => {
                     />
                 </div>
                 <button onClick={submitData} className="btn waves-effect waves-light #64b5f6 blue darken-2">Login</button>
+                <hr style={{marginTop:'20px', width:'50%'}}/>
+                <Link to='/resetPass' className='blue-text text-darken-4'>Forgot Password?</Link>
                 <h6>Don't have an account? <Link className="blue-text lighten-2" to="/signup">Sign up</Link></h6>
             </div>
         </section>
