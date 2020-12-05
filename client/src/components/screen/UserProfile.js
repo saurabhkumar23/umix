@@ -1,5 +1,5 @@
 import React,{useState,useEffect,useContext} from 'react'
-import {useParams} from 'react-router-dom'
+import {useParams,Link} from 'react-router-dom'
 import {UserContext} from '../../App'
 import {useHistory} from 'react-router-dom';
 import M from 'materialize-css'
@@ -29,7 +29,7 @@ const UserProfile = () => {
                 setUserProfile(result)
             }
         })
-    },[])
+    },[userid])
 
     // api call to follow event
     const followUser = () => {

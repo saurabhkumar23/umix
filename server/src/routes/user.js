@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const User = require('../models/user')
 const Post = require('../models/post')
 const requireLogin = require('../middleware/requireLogin')
+const user = require('../models/user')
 const router = express.Router()
 
 /////////////// routes ////////////////
@@ -74,6 +75,17 @@ router.put('/updatePhoto',requireLogin,(req,res) => {
             return res.status(422).json({error : error})
         return res.json(result)
     })
+})
+
+//search users by name
+router.post('/searchUsers',(req,res) => {
+    let userPattern = new RegExp('^'+req.body.data)
+    User.find({name : {$regex:userPattern}})
+    .select('_id name email')
+    .then(users => {
+        return res.json(users)
+    })
+    .catch(error =>  res.status(422).json({error}))
 })
 
 ///////////// export //////////////////
