@@ -25,6 +25,7 @@ const CreatePost = () => {
             .then((data) => {
                 if(data.error){
                     M.toast({html: data.error,classes:"#c62828 red darken-3"})
+                    setUrl('')
                 }
                 else{
                     M.toast({html: `Post created Successfully!`,classes:"#2e7d32 green darken-3"})
@@ -37,6 +38,10 @@ const CreatePost = () => {
 
     // submit image data to cloudinary and get the url back for posting data to DB
     const postDetails = () => {
+        if(!title || !body || !image){
+            M.toast({html: 'Please fill all the fields',classes:"#c62828 red darken-3"})
+            return
+        }
         const data = new FormData()
         data.append('file',image)
         data.append('upload_preset','umix-app')

@@ -1,6 +1,7 @@
 ////////////// require ////////////////
 const express = require('express')
 const mongoose = require('mongoose')
+const { check,validationResult } = require('express-validator')
 const User = require('../models/user')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
@@ -9,19 +10,41 @@ const {SENDGRID_API_KEY} = require('../keys')
 const sgMail = require('@sendgrid/mail')
 const crypto = require('crypto')
 const user = require('../models/user')
+const { match } = require('assert')
 sgMail.setApiKey(SENDGRID_API_KEY)
 const router = express.Router()
 
 /////////////// routes ////////////////
 
 // SIGNUP 
-router.post('/signup',(req,res) => {
+router.post('/signup',[
+    check('name')
+    .notEmpty()
+    .withMessage('Name is required')
+    .isLength({min: 2})
+    .withMessage('Name must contain atleast 2 characters')
+    .isLength({max: 40})
+    .withMessage('Name must contain atmax 20 characters'),
+    check('email')
+    .notEmpty()
+    .withMessage('Email is required')
+    .isEmail()
+    .withMessage('Email should be a valid email'),
+    check('password')
+    .notEmpty()
+    .withMessage('Password is required')
+    .isLength({min: 5})
+    .withMessage('Password must contain atleast 5 characters')
+    .isLength({max: 15})
+    .withMessage('Password must contain atmax 15 characters')
+],(req,res) => {
+    //validation
+    const errors = validationResult(req)
+    if(errors.array().length>0){
+        return res.status(400).json({error : errors.array()[0].msg})
+    }
     //fetching data
     const {name,email,password,photo} = req.body
-    //validation
-    if(!name || !email || !password){
-        return res.status(404).json({'error' : 'Please fill all the fields!'})
-    }
     //check via email, if user already registered
     User.findOne({email:email})
     .then((user) => {
@@ -51,13 +74,23 @@ router.post('/signup',(req,res) => {
 })
 
 // SIGNIN
-router.post('/signin',(req,res) => {
+router.post('/signin',[
+    check('email')
+    .notEmpty()
+    .withMessage('Email is required')
+    .isEmail()
+    .withMessage('Email should be a valid email'),
+    check('password')
+    .notEmpty()
+    .withMessage('Password is required')
+],(req,res) => {
+    //validation
+    const errors = validationResult(req)
+    if(errors.array().length>0){
+        return res.status(400).json({error : errors.array()[0].msg})
+    }
     //fetching data
     const {email,password} = req.body
-    //validation
-    if(!email || !password){
-        return res.status(404).json({'error' : 'Please add both the email and password'})
-    }
     //check via email, if user not registered
     User.findOne({email:email})
     .then((user) => {
@@ -111,7 +144,20 @@ router.post('/resetPassword',(req,res) => {
     }) 
 })
 
-router.post('/newPassword',(req,res) => {
+router.post('/newPassword',[
+    check('password')
+    .notEmpty()
+    .withMessage('Password is required')
+    .isLength({min: 5})
+    .withMessage('Password must contain atleast 5 characters')
+    .isLength({max: 15})
+    .withMessage('Password must contain atmax 15 characters')
+],(req,res) => {
+    //validation
+    const errors = validationResult(req)
+    if(errors.array().length>0){
+        return res.status(400).json({error : errors.array()[0].msg})
+    }
     const newPassword = req.body.password
     const token = req.body.token
     User.findOne({resetToken:token,expireToken:{$gt:Date.now()}})

@@ -25,6 +25,7 @@ const Signup = () => {
             .then((data) => {
                 if(data.error){
                     M.toast({html: data.error,classes:"#c62828 red darken-3"})
+                    setUrl('')
                 }
                 else{
                     M.toast({html: data.message,classes:"#2e7d32 green darken-3"})
