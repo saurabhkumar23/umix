@@ -1,15 +1,25 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useContext} from 'react'
 import {Link,useHistory} from 'react-router-dom';
 import M from 'materialize-css'
+import {UserContext} from '../../App'
 
 const Signup = () => {
 
     const history = useHistory()
+    const {state,dispatch} = useContext(UserContext)
+
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [image, setImage] = useState('')
     const [url,setUrl] = useState('')
+
+    useEffect(() => {
+        if(state){
+            console.log('useeffect chala')
+            history.push('/')
+        }
+    })
 
      // api call to create a user
     useEffect(() => {

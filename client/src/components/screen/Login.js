@@ -1,4 +1,4 @@
-import React,{useState,useContext} from 'react'
+import React,{useState,useContext, useEffect} from 'react'
 import {Link,useHistory} from 'react-router-dom';
 import M from 'materialize-css'
 import {UserContext} from '../../App'
@@ -10,6 +10,13 @@ const Login = () => {
     const history = useHistory()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+
+    useEffect(() => {
+        if(state){
+            console.log('useeffect chala')
+            history.push('/')
+        }
+    })
 
     // api call to backend
     const submitData = () => {

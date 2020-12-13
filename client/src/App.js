@@ -1,5 +1,5 @@
 import React,{createContext,useEffect,useReducer,useContext} from 'react'
-import {BrowserRouter,Route,useHistory} from 'react-router-dom';
+import {BrowserRouter,Redirect,Route,Switch,useHistory} from 'react-router-dom';
 import './App.scss';
 import Navbar from './components/Navbar'
 import Home from './components/screen/Home';
@@ -12,6 +12,7 @@ import ResetPass from './components/screen/ResetPass';
 import NewPass from './components/screen/NewPass';
 
 import {reducer,initialState} from './Reducers/userReducer'
+import ErrorPage from './components/screen/ErrorPage';
 
 export const UserContext = createContext()
 
@@ -34,14 +35,18 @@ const Routing = () => {
 
     return (
         <>
-        <Route exact path='/' component={Home}/>
-        <Route path='/login' component={Login}/>
-        <Route path='/signup' component={Signup}/>
-        <Route exact path='/profile' component={Profile}/>
-        <Route path='/create' component={CreatePost}/>
-        <Route path='/profile/:userid' component={UserProfile}/>
-        <Route exact path='/resetPass' component={ResetPass}/>
-        <Route path='/resetPass/:token' component={NewPass}/>
+            <Navbar/>
+            <Switch>
+                <Route exact path='/' component={Home}/>
+                <Route exact path='/login' component={Login}/>
+                <Route exact path='/signup' component={Signup}/>
+                <Route exact path='/profile' component={Profile}/>
+                <Route exact path='/create' component={CreatePost}/>
+                <Route exact path='/profile/:userid' component={UserProfile}/>
+                <Route exact path='/resetPass' component={ResetPass}/>
+                <Route exact path='/resetPass/:token' component={NewPass}/>
+                <Redirect to="/notFound"/>
+            </Switch>
         </>
     )
 }
@@ -52,8 +57,10 @@ const App = () => {
         <>
             <UserContext.Provider value={{state,dispatch}}>
                 <BrowserRouter>
-                    <Navbar/>
-                    <Routing/>
+                    <Switch>
+                        <Route exact path="/notFound" component={ErrorPage}/>
+                        <Route component={Routing}/>
+                    </Switch>
                 </BrowserRouter>
             </UserContext.Provider>
         </>

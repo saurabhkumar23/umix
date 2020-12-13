@@ -125,7 +125,7 @@ const Home = () => {
                                         {item.postedBy._id === state._id 
                                         ? 
                                             <div>
-                                                <Link to="/profile">{item.postedBy.name}</Link>
+                                                <Link to="/profile" style={{color:'black'}}>{item.postedBy.name}</Link>
                                                 <i style={{float:'right'}} className="material-icons" onClick={() => deletePost(item._id)}>delete</i> 
                                             </div>
                                         : 

@@ -35,7 +35,6 @@ const Navbar = () => {
             })
             .then((res) => res.json())
             .then((result) => {
-                console.log(result)
                 setSearchUsers(result)
             })
             .catch((error) => console.log(error))
@@ -52,18 +51,18 @@ const Navbar = () => {
     const renderLinks = () => {
         if(state){
             return [
-                <li>
+                <li key="1">
                     <i data-target="modal1" className="large material-icons modal-trigger" style={{color:'black'}}>search</i>
                 </li>,
-                <li><Link to="/profile">Profile</Link></li>,
-                <li><Link to="/create">Create Post</Link></li>,
-                <button onClick={onLogout} className="btn #ef5350 red lighten-1">Logout</button>
+                <li key="2"><Link to="/profile">Profile</Link></li>,
+                <li key="3"><Link to="/create">Create Post</Link></li>,
+                <button key="4" onClick={onLogout} className="btn #ef5350 red lighten-1">Logout</button>
             ]
         }
         else{
             return [
-                <li><Link to="/login">Login</Link></li>,
-                <li><Link to="/signup">Signup</Link></li>
+                <li key="5"><Link to="/login">Login</Link></li>,
+                <li key="6"><Link to="/signup">Signup</Link></li>
             ]
         }
     }
@@ -91,10 +90,10 @@ const Navbar = () => {
                         {
                             searchUsers.map(user => 
                                 <Link 
-                                    to={!state ? "/login" : (user._id==state._id ? "/profile" : "/profile/"+user._id )}
-                                    className = "modal-close">
-                                    <li 
-                                        key={user._id} 
+                                    to={!state ? "/login" : (user._id===state._id ? "/profile" : "/profile/"+user._id )}
+                                    className = "modal-close"
+                                    key={user._id}>
+                                    <li  
                                         className="collection-item">
                                         {user.name}
                                         <span className="grey-text text-darken-2" style={{float:'right'}}>{user.email}</span>

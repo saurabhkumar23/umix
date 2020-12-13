@@ -73,6 +73,7 @@ const Profile = () => {
 
     const updatePhoto = (file) => {
         setImage(file)
+
     }
 
     return (
@@ -84,11 +85,11 @@ const Profile = () => {
                     <div className="main-profile-container">
                         <div className="profile-head">
                             <div>
-                                <img src={state.photo}/>
+                                <img src={state.photo} alt="profile-image"/>
                                 <div className="file-field input-field">
                                     <div className="btn #64b5f6 blue darken-2">
                                         <span><i className="material-icons">add_a_photo</i></span>
-                                        <input type="file" onChange={(e) => updatePhoto(e.target.files[0])}/>
+                                        <input type="file" value="" onChange={(e) => updatePhoto(e.target.files[0])}/>
                                     </div>
                                     <div className="file-path-wrapper">
                                         <input className="file-path validate" type="text"/>
