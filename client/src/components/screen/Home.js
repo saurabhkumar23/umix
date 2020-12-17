@@ -121,28 +121,27 @@ const Home = () => {
                         data.map((item) => {
                             return (
                                 <div className="card" key={item._id}>
-                                    <h5 style={{padding:"6px"}}>
-                                        {item.postedBy._id === state._id 
-                                        ? 
-                                            <div>
-                                                <Link to="/profile" style={{color:'black'}}>{item.postedBy.name}</Link>
-                                                <i style={{float:'right'}} className="material-icons" onClick={() => deletePost(item._id)}>delete</i> 
-                                            </div>
-                                        : 
-                                            <div>
-                                                <Link to={"/profile/"+item.postedBy._id}>{item.postedBy.name}</Link>
-                                            </div>
-                                        }
-                                    </h5>
+                                    <div className='main-head'>
+                                        <div className='profile-link'>
+                                            <img className='side-image' src={item.postedBy.photo} alt='pic'/>
+                                            <h5>
+                                                {item.postedBy.id === state._id ? 
+                                                <Link to="/profile">{item.postedBy.name}</Link> : 
+                                                <Link to={"/profile/"+item.postedBy._id}>{item.postedBy.name}</Link>}
+                                            </h5>
+                                        </div>
+                                        <div>
+                                            {item.postedBy._id === state._id ? <i style={{float:'right'}} className="material-icons" onClick={() => deletePost(item._id)}>delete</i> : null}
+                                        </div>
+                                    </div>
                                     <div className="card-image">
                                         <img src={item.photo}/>
                                     </div>
                                     <div className="card-content">
-                                        <i className="material-icons heart-icon">favorite</i>
                                         {
                                             item.likes.includes(state._id) 
-                                            ? <i className="material-icons" onClick={() => unlikePost(item._id)}>thumb_down</i>
-                                            : <i className="material-icons" onClick={() => likePost(item._id)}>thumb_up</i>
+                                            ? <i className="material-icons heart-icon" onClick={() => unlikePost(item._id)}>favorite</i>
+                                            : <i className="material-icons heart-icon" onClick={() => likePost(item._id)}>favorite_border</i>
                                         }                                
                                         <h6>{item.likes.length} Likes</h6>
                                         <h6>{item.title}</h6>

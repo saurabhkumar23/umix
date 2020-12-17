@@ -87,7 +87,7 @@ router.post('/signin',[
     //validation
     const errors = validationResult(req)
     if(errors.array().length>0){
-        return res.status(400).json({error : errors.array()[0].msg})
+        return res.json({error : errors.array()[0].msg})
     }
     //fetching data
     const {email,password} = req.body
@@ -115,7 +115,18 @@ router.post('/signin',[
     .catch((error) => res.status(404).json({error : error}))
 })
 
-router.post('/resetPassword',(req,res) => {
+router.post('/resetPassword',[
+    check('email')
+    .notEmpty()
+    .withMessage('Email is required')
+    .isEmail()
+    .withMessage('Email should be a valid email')
+],(req,res) => {
+    //validation
+    const errors = validationResult(req)
+    if(errors.array().length>0){
+        return res.status(400).json({error : errors.array()[0].msg})
+    }
     crypto.randomBytes(32,(err,buffer) => {
         if(err){
             return console.log(err)

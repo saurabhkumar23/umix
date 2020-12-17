@@ -19,7 +19,7 @@ router.get('/showMyPost',requireLogin,(req,res) => {
 //SHOW ALL POST
 router.get('/showAllPost',requireLogin,(req,res) => {
     Post.find()
-    .populate('postedBy','_id name')
+    .populate('postedBy','_id name photo')
     .populate('comments.postedBy','_id name')
     .sort('-createdAt')
     .then((posts) => res.json({posts}))

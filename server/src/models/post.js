@@ -1,7 +1,6 @@
 ////////////// require ////////////////
 const mongoose = require('mongoose')
 
-// post - title, body, photo, postedBy
 const postSchema = new mongoose.Schema({
     
     title : {

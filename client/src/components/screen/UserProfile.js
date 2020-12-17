@@ -105,9 +105,9 @@ const UserProfile = () => {
                                     }
                                 </div>
                                 <div className="profile-info">
-                                    <h5>{userProfile.posts.length} Posts</h5>
-                                    <h5>{userProfile.user.followers.length} Followers</h5>
-                                    <h5>{userProfile.user.following.length} Following</h5>
+                                    <h5><span>{userProfile.posts.length}</span> Posts</h5>
+                                    <h5><span>{userProfile.user.followers.length}</span> Followers</h5>
+                                    <h5><span>{userProfile.user.following.length}</span> Following</h5>
                                 </div>
                             </div>
                         </div>

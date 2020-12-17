@@ -100,9 +100,9 @@ const Profile = () => {
                                 <h4>{state.name}</h4>
                                 <h6>{state.email}</h6>
                                 <div className="profile-info">
-                                    <h5>{posts.length} Posts</h5>
-                                    <h5>{state.followers.length} Followers</h5>
-                                    <h5>{state.following.length} Following</h5>
+                                    <h5><span>{posts.length}</span> Posts</h5>
+                                    <h5><span>{state.followers.length}</span> Followers</h5>
+                                    <h5><span>{state.following.length}</span> Following</h5>
                                 </div>
                             </div>
                         </div>
