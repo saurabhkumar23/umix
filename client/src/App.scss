@@ -106,6 +106,27 @@
             color : #ef5350 !important;
         }
     }
+    .card-content{
+        input{
+            border: none;
+            border-top: 1px solid #d6d4d4;
+            &:focus{
+                box-shadow: none !important;
+                border-bottom: none !important;
+            }
+        }
+        .comment-box{
+            margin: 15px 0;
+            p span{
+                font-size: 1.3em;
+                font-weight: 500;
+                margin-right: 10px;
+            }
+            a{
+                color: black;
+            }
+        }
+    }
 }
 
 .material-icons:hover  {

@@ -74,7 +74,13 @@ const Home = () => {
     }
 
     // api call to update comments on a post
-    const commentPost = (text,postId) => {
+    const commentPost = (e,postId) => {
+        e.preventDefault()
+        if(!e.target[0].value.trim()){
+            return 
+        }
+        const text = e.target[0].value
+        e.target[0].value = ''
         fetch('/comment',{
             method : 'put',
             headers :{
@@ -138,23 +144,33 @@ const Home = () => {
                                         <img src={item.photo}/>
                                     </div>
                                     <div className="card-content">
-                                        {
-                                            item.likes.includes(state._id) 
-                                            ? <i className="material-icons heart-icon" onClick={() => unlikePost(item._id)}>favorite</i>
-                                            : <i className="material-icons heart-icon" onClick={() => likePost(item._id)}>favorite_border</i>
-                                        }                                
-                                        <h6>{item.likes.length} Likes</h6>
-                                        <h6>{item.title}</h6>
-                                        <p>{item.body}</p>
-                                        {
-                                            item.comments.map((record) => <h6 key={record._id}><span style={{fontWeight:"500"}}>{record.postedBy.name}</span> {record.text}</h6>)
-                                        }
-                                        <form onSubmit={(e) => {
-                                            e.preventDefault()
-                                            commentPost(e.target[0].value,item._id)
-                                        }}> 
-                                            <input type="text" placeholder="add a comment"/>
-                                        </form>
+                                        <div className='post-details'>
+                                            {
+                                                item.likes.includes(state._id) 
+                                                ? <i className="material-icons heart-icon" onClick={() => unlikePost(item._id)}>favorite</i>
+                                                : <i className="material-icons heart-icon" onClick={() => likePost(item._id)}>favorite_border</i>
+                                            }                                
+                                            <h6>{item.likes.length} Likes</h6>
+                                            <h6>{item.title}</h6>
+                                            <p>{item.body}</p>
+                                        </div>
+                                        <div className='comment-box'>
+                                            {
+                                                item.comments.map((record) => <p key={record._id}>
+                                                <span>
+                                                <Link to={record.postedBy._id===state._id ? "/profile" : "/profile/"+record.postedBy._id}>
+                                                    {record.postedBy.name} 
+                                                </Link>
+                                                </span> 
+                                                {record.text}
+                                                </p>)
+                                            }
+                                        </div>
+                                        <div>
+                                            <form onSubmit={(e) => commentPost(e,item._id)}> 
+                                                <input type="text" placeholder="Add a comment..."/>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             )
