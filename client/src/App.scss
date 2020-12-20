@@ -54,13 +54,22 @@
         border-bottom: 1px solid grey;
     }
     .profile-info{
-        display: flex;
-        justify-content: space-between;
-        width: 108%;
-        h5{
-            font-size: 1.5em;
-            span{
-                font-weight: 500;
+        h4{
+            font-weight: 100;
+            font-size: 2.5em;
+        }
+        h6{
+            color: #878585;
+        }
+        .profile-sub-details{
+            display: flex;
+            justify-content: space-between;
+            width: 108%;
+            h5{
+                font-size: 1.5em;
+                span{
+                    font-weight: 500;
+                }
             }
         }
     }

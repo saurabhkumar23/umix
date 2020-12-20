@@ -69,15 +69,16 @@ const Navbar = () => {
 
     return (
         <section id="navbar">
-            <nav>
-                <div className="nav-wrapper white">
-                    <Link to={state ? "/" : "/login"} className="brand-logo left">Umix</Link>
-                    <ul id="nav-mobile" className="right">
-                        {renderLinks()}
-                    </ul>
-                </div>
-            </nav>
-
+            <div className='navbar-fixed'>
+                <nav>
+                    <div className="nav-wrapper white">
+                        <Link to={state ? "/" : "/login"} className="brand-logo left">Umix</Link>
+                        <ul id="nav-mobile" className="right">
+                            {renderLinks()}
+                        </ul>
+                    </div>
+                </nav>
+            </div>
             <div id="modal1" className="modal modal-fixed-footer" ref={searchModal} style={{color:'black'}}>
                 <div className="modal-content">
                     <div className="input-field">

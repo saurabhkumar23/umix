@@ -11,7 +11,6 @@ const Home = () => {
 
     // api call to fetch all posts from DB
     useEffect(() => {
-        //console.log('HOME use-effect chala!')
         fetch('/showAllPost',{
             headers :{
                 "Authorization" : `Bearer ${localStorage.getItem("jwt")}`
@@ -25,6 +24,7 @@ const Home = () => {
             }
             else{
                 setData(result.posts)
+                console.log(result.posts)
             }
         })
         .catch((error) => console.log(error))
@@ -118,6 +118,27 @@ const Home = () => {
         })
     }
 
+    //api call to delete a comment
+    const deleteComment = (commentId,postId) => {
+        console.log(commentId, postId)
+        // fetch(`/deleteComment/${commentId}`,{
+        //     method : 'delete',
+        //     headers :{
+        //         "Authorization" : `Bearer ${localStorage.getItem("jwt")}`,
+        //         "Content-Type" : "application/json"
+        //     },
+        //     body : JSON.stringify({postId})
+        // })
+        // .then((res) => res.json())
+        // .then((result) => {
+        //     console.log(result)
+        //     // const newData = data.filter((item) => {
+        //     //     return item._id!==result._id
+        //     // })
+        //     // setData(newData)
+        // })
+    }
+
     return (
         <>
             {
@@ -131,7 +152,7 @@ const Home = () => {
                                         <div className='profile-link'>
                                             <img className='side-image' src={item.postedBy.photo} alt='pic'/>
                                             <h5>
-                                                {item.postedBy.id === state._id ? 
+                                                {item.postedBy._id === state._id ? 
                                                 <Link to="/profile">{item.postedBy.name}</Link> : 
                                                 <Link to={"/profile/"+item.postedBy._id}>{item.postedBy.name}</Link>}
                                             </h5>
@@ -156,14 +177,17 @@ const Home = () => {
                                         </div>
                                         <div className='comment-box'>
                                             {
-                                                item.comments.map((record) => <p key={record._id}>
-                                                <span>
-                                                <Link to={record.postedBy._id===state._id ? "/profile" : "/profile/"+record.postedBy._id}>
-                                                    {record.postedBy.name} 
-                                                </Link>
-                                                </span> 
-                                                {record.text}
-                                                </p>)
+                                                item.comments.map((comment) => 
+                                                <p key={comment._id}>
+                                                    <span>
+                                                    <Link to={comment.postedBy._id===state._id ? "/profile" : "/profile/"+comment.postedBy._id}>
+                                                        {comment.postedBy.name} 
+                                                    </Link>
+                                                    </span> 
+                                                    {comment.text}
+                                                    {comment.postedBy._id === state._id ? <i style={{float:'right'}} className="material-icons" onClick={() => deleteComment(comment._id,item._id)}>delete</i> : null}
+                                                </p>
+                                                )
                                             }
                                         </div>
                                         <div>

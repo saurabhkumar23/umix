@@ -90,11 +90,11 @@ const UserProfile = () => {
                 ?
                 <section className="profile">
                     <div className="main-profile-container">
-                        <div className="profile-head">
+                    <div className="profile-head">
                             <div>
-                                <img src={userProfile.user.photo}/>
+                                <img src={userProfile.user.photo} alt="profile-image"/>
                             </div>
-                            <div>
+                            <div className='profile-info'>
                                 <h4>{userProfile.user.name}</h4>
                                 <h6>{userProfile.user.email}</h6>
                                 <div style={{marginTop:'20px'}}>
@@ -104,7 +104,7 @@ const UserProfile = () => {
                                         :   <button onClick={unfollowUser} className="btn waves-effect waves-light #64b5f6 blue darken-2">unFollow</button>  
                                     }
                                 </div>
-                                <div className="profile-info">
+                                <div className="profile-sub-details">
                                     <h5><span>{userProfile.posts.length}</span> Posts</h5>
                                     <h5><span>{userProfile.user.followers.length}</span> Followers</h5>
                                     <h5><span>{userProfile.user.following.length}</span> Following</h5>
