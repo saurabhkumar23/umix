@@ -1,16 +1,19 @@
 import React,{useState,useEffect,useContext} from 'react'
 import {Link,useHistory} from 'react-router-dom';
 import {UserContext} from '../../App'
+import Loading from './Loading'
 import M from 'materialize-css'
 
 const Home = () => {
 
     const history = useHistory()
     const [data,setData] = useState([])
+    const [loading,setLoading] = useState(false)
     const {state,dispatch} = useContext(UserContext)
 
     // api call to fetch all posts from DB
     useEffect(() => {
+        setLoading(true)
         fetch('/showAllPost',{
             headers :{
                 "Authorization" : `Bearer ${localStorage.getItem("jwt")}`
@@ -24,8 +27,8 @@ const Home = () => {
             }
             else{
                 setData(result.posts)
-                console.log(result.posts)
             }
+            setLoading(false)
         })
         .catch((error) => console.log(error))
     },[])
@@ -142,8 +145,8 @@ const Home = () => {
     return (
         <>
             {
-                data
-                ? <section className="home">
+                loading || !state ? <Loading/> :
+                <section className="home">
                     {
                         data.map((item) => {
                             return (
@@ -201,7 +204,6 @@ const Home = () => {
                         })
                     }
                 </section> 
-                : <h2>Loading....!</h2>
             }
         </>
         

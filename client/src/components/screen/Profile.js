@@ -1,5 +1,6 @@
 import React,{useState,useEffect,useContext} from 'react'
 import {UserContext} from '../../App'
+import Loading from './Loading'
 import M from 'materialize-css'
 
 const Profile = () => {
@@ -7,11 +8,12 @@ const Profile = () => {
     const [posts,setPosts] = useState([])
     const [image, setImage] = useState('')
     const [url,setUrl] = useState('')
+    const [loading,setLoading] = useState(false)
     const {state,dispatch} = useContext(UserContext)
 
     // api call to fetch my post images
     useEffect(() => {
-        //console.log('useeffect chala bhai')
+        setLoading(true)
         fetch('/showMyPost',{
             headers: {
                 "Authorization" : `Bearer ${localStorage.getItem('jwt')}`
@@ -25,6 +27,7 @@ const Profile = () => {
             else{
                 setPosts(result.posts)
             }
+            setLoading(false)
         })
     },[])
 
@@ -49,6 +52,7 @@ const Profile = () => {
                     localStorage.setItem('user',JSON.stringify({...state,photo:data.photo}))
                     dispatch({type:"UPDATEPIC",payload:data.photo})
                 }
+                setLoading(false)
             })
             .catch((error) => console.log(error))
         }
@@ -57,6 +61,7 @@ const Profile = () => {
     // submit image data to cloudinary and get the url back for posting data to DB
     useEffect(() => {
         if(image){
+            setLoading(true)
             const data = new FormData()
             data.append('file',image)
             data.append('upload_preset','umix-app')
@@ -73,27 +78,29 @@ const Profile = () => {
 
     const updatePhoto = (file) => {
         setImage(file)
-
     }
 
     return (
         <>
             {
-                state && posts
-                ? 
+                loading || !state ? <Loading/> :
                 <section className="profile">
                     <div className="main-profile-container">
                         <div className="profile-head">
                             <div>
-                                <img src={state.photo} alt="profile-image"/>
+                                <div className='pic-container'>
+                                    <div className='pic'>
+                                        {loading ? <Loading/> : <img src={state.photo} alt="profile-image"/> }
+                                    </div>
+                                </div>
                                 <div className="file-field input-field">
-                                    <div className="btn #64b5f6 blue darken-2">
-                                        <span><i className="material-icons">add_a_photo</i></span>
-                                        <input type="file" value="" onChange={(e) => updatePhoto(e.target.files[0])}/>
-                                    </div>
-                                    <div className="file-path-wrapper">
-                                        <input className="file-path validate" type="text"/>
-                                    </div>
+                                        <div className="btn #64b5f6 blue darken-2">
+                                            <span><i className="material-icons">add_a_photo</i></span>
+                                            <input type="file" value="" onChange={(e) => updatePhoto(e.target.files[0])}/>
+                                        </div>
+                                        <div className="file-path-wrapper">
+                                            <input className="file-path validate" type="text"/>
+                                        </div>
                                 </div>
                             </div>
                             <div className='profile-info'>
@@ -113,12 +120,8 @@ const Profile = () => {
                         </div>
                     </div>
                 </section>
-                :
-                <h1>Loading...!</h1>
             }
         </>
-        
-        
     );
 }
 

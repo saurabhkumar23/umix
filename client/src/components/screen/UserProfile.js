@@ -3,6 +3,7 @@ import {useParams,Link} from 'react-router-dom'
 import {UserContext} from '../../App'
 import {useHistory} from 'react-router-dom';
 import M from 'materialize-css'
+import Loading from './Loading'
 
 const UserProfile = () => {
 
@@ -10,10 +11,11 @@ const UserProfile = () => {
     const [userProfile,setUserProfile] = useState(null)
     const {state,dispatch} = useContext(UserContext)
     const {userid} = useParams()
+    const [loading,setLoading] = useState(false)
 
     // api call to fetch user details
     useEffect(() => {
-        //console.log('use effect chala bhai')
+        setLoading(true)
         fetch(`/user/${userid}`,{
             headers: {
                 "Authorization" : `Bearer ${localStorage.getItem('jwt')}`
@@ -28,8 +30,9 @@ const UserProfile = () => {
             else{
                 setUserProfile(result)
             }
+            setLoading(false)
         })
-    },[userid])
+    },[])
 
     // api call to follow event
     const followUser = () => {
@@ -86,13 +89,14 @@ const UserProfile = () => {
 
     return (
         <>
-            {userProfile 
-                ?
+            { loading || !userProfile ? <Loading/> : 
                 <section className="profile">
                     <div className="main-profile-container">
                     <div className="profile-head">
-                            <div>
-                                <img src={userProfile.user.photo} alt="profile-image"/>
+                            <div className='pic-container'>
+                                <div className='pic'>
+                                    <img src={userProfile.user.photo} alt="profile-image"/>
+                                </div>
                             </div>
                             <div className='profile-info'>
                                 <h4>{userProfile.user.name}</h4>
@@ -118,8 +122,6 @@ const UserProfile = () => {
                         </div>
                     </div>
                 </section>
-                : 
-                <h2>Loading...!</h2>
             }
         </>
         

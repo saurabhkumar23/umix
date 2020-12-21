@@ -2,11 +2,13 @@ import React,{useState,useEffect,useContext} from 'react'
 import {Link,useHistory} from 'react-router-dom';
 import M from 'materialize-css'
 import {UserContext} from '../../App'
+import Loading from './Loading'
 
 const Signup = () => {
 
     const history = useHistory()
     const {state,dispatch} = useContext(UserContext)
+    const [loading,setLoading] = useState(false)
 
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
@@ -16,7 +18,6 @@ const Signup = () => {
 
     useEffect(() => {
         if(state){
-            console.log('useeffect chala')
             history.push('/')
         }
     })
@@ -41,6 +42,7 @@ const Signup = () => {
                     M.toast({html: data.message,classes:"#2e7d32 green darken-3"})
                     history.push('/login')
                 }
+                setLoading(false)
             })
             .catch((error) => console.log(error))
         }
@@ -62,6 +64,7 @@ const Signup = () => {
     }
         
     const submitData = () => {
+        setLoading(true)
         if(image){
             uploadPic()
         }
@@ -71,40 +74,45 @@ const Signup = () => {
     }
 
     return (
-        <section className="signup-form">
-            <div className="card">
-                <h2>Umix</h2>
-                <div className="input-field">
-                    <input type="text" placeholder="Name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                    />
-                </div>
-                <div className="input-field">
-                    <input type="text" placeholder="E-mail"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                </div>
-                <div className="input-field">
-                    <input type="password" placeholder="Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </div>
-                <div className="file-field input-field">
-                    <div className="btn #64b5f6 blue darken-2">
-                        <span>Upload Profile</span>
-                        <input type="file" onChange={(e) => setImage(e.target.files[0])}/>
+        <>
+            {
+                loading ? <Loading/> :
+                <section className="signup-form">
+                    <div className="card">
+                        <h2>Umix</h2>
+                        <div className="input-field">
+                            <input type="text" placeholder="Name"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                            />
+                        </div>
+                        <div className="input-field">
+                            <input type="text" placeholder="E-mail"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                        </div>
+                        <div className="input-field">
+                            <input type="password" placeholder="Password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                        </div>
+                        <div className="file-field input-field">
+                            <div className="btn #64b5f6 blue darken-2">
+                                <span>Upload Profile</span>
+                                <input type="file" onChange={(e) => setImage(e.target.files[0])}/>
+                            </div>
+                            <div className="file-path-wrapper">
+                                <input className="file-path validate" type="text"/>
+                            </div>
+                        </div>
+                        <button onClick={submitData} className="btn waves-effect waves-light #64b5f6 blue darken-2">Register</button>
+                        <h6>Have an account? <Link className="blue-text lighten-2" to="/login">Log in</Link></h6>
                     </div>
-                    <div className="file-path-wrapper">
-                        <input className="file-path validate" type="text"/>
-                    </div>
-                </div>
-                <button onClick={submitData} className="btn waves-effect waves-light #64b5f6 blue darken-2">Register</button>
-                <h6>Have an account? <Link className="blue-text lighten-2" to="/login">Log in</Link></h6>
-            </div>
-        </section>
+                </section>
+            }
+        </>
     );
 }
 

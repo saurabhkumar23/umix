@@ -42,10 +42,18 @@
         margin: 0px auto;
     }
     .profile-head{
-        img{
-            width: 160px;
-            height: 160px;
-            border-radius: 80px;
+        .pic-container{
+            position: relative;
+            display: flex;
+            .pic{
+                margin: 0 auto;
+                height: 160px;
+                img{
+                    width: 160px;
+                    height: 160px;
+                    border-radius: 80px;
+                }
+            }
         }
         display: flex;
         justify-content: space-around;
@@ -140,4 +148,13 @@
 
 .material-icons:hover  {
     cursor : pointer
+}
+
+.preloader-wrapper{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
 }

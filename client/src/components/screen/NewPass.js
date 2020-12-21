@@ -1,14 +1,17 @@
 import React,{useState,useEffect} from 'react'
 import {Link,useHistory, useParams} from 'react-router-dom';
 import M from 'materialize-css'
+import Loading from './Loading'
 
 const NewPass = () => {
 
     const history = useHistory()
+    const [loading,setLoading] = useState(false)
     const [password, setPassword] = useState("")
     const {token} = useParams()
         
     const submitData = () => {
+        setLoading(true)
         fetch("/newPassword",{
             method : "post",
             headers : {
@@ -25,23 +28,30 @@ const NewPass = () => {
                 M.toast({html: data.message,classes:"#2e7d32 green darken-3"})
                 history.push('/login')
             }
+            setLoading(false)
         })
         .catch((error) => console.log(error))
     }
 
     return (
-        <section className="signup-form">
-            <div className="card">
-                <h2>Umix</h2>
-                <div className="input-field">
-                    <input type="password" placeholder="New Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </div>
-                <button onClick={submitData} className="btn waves-effect waves-light #64b5f6 blue darken-2">Update</button>
-            </div>
-        </section>
+        <>
+            {
+                loading ? <Loading/> :
+                <section className="signup-form">
+                    <div className="card">
+                        <h2>Umix</h2>
+                        <div className="input-field">
+                            <input type="password" placeholder="New Password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                        </div>
+                        <button onClick={submitData} className="btn waves-effect waves-light #64b5f6 blue darken-2">Update</button>
+                    </div>
+                </section>
+            }
+        </>
+        
     );
 }
 
