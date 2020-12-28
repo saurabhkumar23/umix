@@ -13,6 +13,7 @@ const Signup = () => {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [isPassVisible,setPassVisible] = useState(false)
     const [image, setImage] = useState('')
     const [url,setUrl] = useState('')
 
@@ -92,11 +93,12 @@ const Signup = () => {
                                 onChange={(e) => setEmail(e.target.value)}
                             />
                         </div>
-                        <div className="input-field">
-                            <input type="password" placeholder="Password"
+                        <div className="input-field password-field">
+                            <input type={isPassVisible ? "text" : "password"} placeholder="Password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
+                            <span onClick={() => setPassVisible(!isPassVisible)}>{isPassVisible ? "Hide" : "Show"}</span>
                         </div>
                         <div className="file-field input-field">
                             <div className="btn #64b5f6 blue darken-2">

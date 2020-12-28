@@ -13,7 +13,7 @@
     }
 }
 
-.login-form, .signup-form, .create-post-form {
+.login-form, .signup-form, .create-post-form, .reset-password-form, .new-password-form {
     h2 {
         font-family: 'Grand Hotel', cursive;
     }
@@ -33,6 +33,18 @@
     }
     h6 {
         margin: 30px;
+    }
+}
+
+.login-form, .signup-form, .new-password-form{
+    .password-field{
+            position: relative;
+        span{
+            position: absolute;
+            top: 15px;
+            right: 5px;
+            cursor: pointer;
+        }
     }
 }
 
@@ -87,6 +99,7 @@
         justify-content: space-around;
         img {
             width: 30%;
+            margin-bottom: 18px;
         }
     }
 }

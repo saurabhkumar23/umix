@@ -30,7 +30,7 @@ const ResetPass = () => {
     }
 
     return (
-        <section className="login-form">
+        <section className="reset-password-form">
             <div className="card">
                 <h2>Umix</h2>
                 <div className="input-field">

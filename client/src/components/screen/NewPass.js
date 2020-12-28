@@ -8,6 +8,7 @@ const NewPass = () => {
     const history = useHistory()
     const [loading,setLoading] = useState(false)
     const [password, setPassword] = useState("")
+    const [isPassVisible,setPassVisible] = useState(false)
     const {token} = useParams()
         
     const submitData = () => {
@@ -37,14 +38,15 @@ const NewPass = () => {
         <>
             {
                 loading ? <Loading/> :
-                <section className="signup-form">
+                <section className="new-password-form">
                     <div className="card">
                         <h2>Umix</h2>
-                        <div className="input-field">
-                            <input type="password" placeholder="New Password"
+                        <div className="input-field password-field">
+                            <input type={isPassVisible ? "text" : "password"} placeholder="Password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
+                            <span onClick={() => setPassVisible(!isPassVisible)}>{isPassVisible ? "Hide" : "Show"}</span>
                         </div>
                         <button onClick={submitData} className="btn waves-effect waves-light #64b5f6 blue darken-2">Update</button>
                     </div>

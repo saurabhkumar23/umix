@@ -12,6 +12,7 @@ const Login = () => {
     const history = useHistory()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [isPassVisible,setPassVisible] = useState(false)
 
     useEffect(() => {
         if(state){
@@ -59,11 +60,12 @@ const Login = () => {
                                 onChange={(e) => setEmail(e.target.value)}
                             />
                         </div>
-                        <div className="input-field">
-                            <input type="password" placeholder="Password"
+                        <div className="input-field password-field">
+                            <input type={isPassVisible ? "text" : "password"} placeholder="Password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
+                            <span onClick={() => setPassVisible(!isPassVisible)}>{isPassVisible ? "Hide" : "Show"}</span>
                         </div>
                         <button onClick={submitData} className="btn waves-effect waves-light #64b5f6 blue darken-2">Login</button>
                         <hr style={{marginTop:'20px', width:'50%'}}/>
