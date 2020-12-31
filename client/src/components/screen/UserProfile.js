@@ -115,10 +115,12 @@ const UserProfile = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="profile-gallery">
-                            {
-                                userProfile.posts.map((post) => <img key={post._id} src={post.photo} alt={post.title}/>)
-                            }
+                        <div class="row profile-gallery">
+                                {
+                                    userProfile.posts.map((post) => <div class="col xl4 m6">
+                                        <img key={post._id} src={post.photo} alt={post.title}/>
+                                        </div>)
+                                }
                         </div>
                     </div>
                 </section>

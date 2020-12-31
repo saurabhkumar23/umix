@@ -30,18 +30,25 @@ const ResetPass = () => {
     }
 
     return (
-        <section className="reset-password-form">
-            <div className="card">
-                <h2>Umix</h2>
-                <div className="input-field">
-                    <input type="text" placeholder="E-mail"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                </div>
-                <button onClick={submitData} className="btn waves-effect waves-light #64b5f6 blue darken-2">Submit</button>
-            </div>
-        </section>
+                <section className='form-main-container'>
+                    <section>
+                        <img src='https://res.cloudinary.com/getgrouped/image/upload/v1609421382/White_and_Pink_Strikeout_Cosmetics_Beauty_Logo_ymim3g.png'
+                            alt='main-logo'
+                        />
+                    </section>
+                    <section className="reset-password-form">
+                        <div className="card">
+                            <h2>Umix</h2>
+                            <div className="input-field">
+                                <input type="text" placeholder="E-mail"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                />
+                            </div>
+                            <button onClick={submitData} className="btn waves-effect waves-light #64b5f6 blue darken-2">Submit</button>
+                        </div>
+                    </section>
+                </section>
     );
 }
 

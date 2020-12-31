@@ -51,28 +51,36 @@ const Login = () => {
         <>
             {
                 loading ? <Loading/> :
-                <section className="login-form">
-                    <div className="card">
-                        <h2>Umix</h2>
-                        <div className="input-field">
-                            <input type="text" placeholder="E-mail"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                            />
+                <section className='form-main-container'>
+                    <section>
+                        <img src='https://res.cloudinary.com/getgrouped/image/upload/v1609421382/White_and_Pink_Strikeout_Cosmetics_Beauty_Logo_ymim3g.png'
+                            alt='main-logo'
+                        />
+                    </section>
+                    <section className="login-form">
+                        <div className="card">
+                            <h2>Umix</h2>
+                            <div className="input-field">
+                                <input type="text" placeholder="E-mail"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                />
+                            </div>
+                            <div className="input-field password-field">
+                                <input type={isPassVisible ? "text" : "password"} placeholder="Password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                />
+                                <span onClick={() => setPassVisible(!isPassVisible)}>{isPassVisible ? "Hide" : "Show"}</span>
+                            </div>
+                            <button onClick={submitData} className="btn waves-effect waves-light #64b5f6 blue darken-2">Login</button>
+                            <hr style={{marginTop:'20px', width:'50%'}}/>
+                            <Link to='/resetPass' className='blue-text text-darken-4'>Forgot Password?</Link>
+                            <h6>Don't have an account? <Link className="blue-text lighten-2" to="/signup">Sign up</Link></h6>
                         </div>
-                        <div className="input-field password-field">
-                            <input type={isPassVisible ? "text" : "password"} placeholder="Password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                            />
-                            <span onClick={() => setPassVisible(!isPassVisible)}>{isPassVisible ? "Hide" : "Show"}</span>
-                        </div>
-                        <button onClick={submitData} className="btn waves-effect waves-light #64b5f6 blue darken-2">Login</button>
-                        <hr style={{marginTop:'20px', width:'50%'}}/>
-                        <Link to='/resetPass' className='blue-text text-darken-4'>Forgot Password?</Link>
-                        <h6>Don't have an account? <Link className="blue-text lighten-2" to="/signup">Sign up</Link></h6>
-                    </div>
+                    </section>
                 </section>
+                
             }
         </>
         

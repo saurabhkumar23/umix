@@ -38,18 +38,25 @@ const NewPass = () => {
         <>
             {
                 loading ? <Loading/> :
-                <section className="new-password-form">
-                    <div className="card">
-                        <h2>Umix</h2>
-                        <div className="input-field password-field">
-                            <input type={isPassVisible ? "text" : "password"} placeholder="Password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                            />
-                            <span onClick={() => setPassVisible(!isPassVisible)}>{isPassVisible ? "Hide" : "Show"}</span>
+                <section className='form-main-container'>
+                    <section>
+                        <img src='https://res.cloudinary.com/getgrouped/image/upload/v1609421382/White_and_Pink_Strikeout_Cosmetics_Beauty_Logo_ymim3g.png'
+                            alt='main-logo'
+                        />
+                    </section>
+                    <section className="new-password-form">
+                        <div className="card">
+                            <h2>Umix</h2>
+                            <div className="input-field password-field">
+                                <input type={isPassVisible ? "text" : "password"} placeholder="Password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                />
+                                <span onClick={() => setPassVisible(!isPassVisible)}>{isPassVisible ? "Hide" : "Show"}</span>
+                            </div>
+                            <button onClick={submitData} className="btn waves-effect waves-light #64b5f6 blue darken-2">Update</button>
                         </div>
-                        <button onClick={submitData} className="btn waves-effect waves-light #64b5f6 blue darken-2">Update</button>
-                    </div>
+                    </section>
                 </section>
             }
         </>

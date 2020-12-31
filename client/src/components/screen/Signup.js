@@ -78,40 +78,47 @@ const Signup = () => {
         <>
             {
                 loading ? <Loading/> :
-                <section className="signup-form">
-                    <div className="card">
-                        <h2>Umix</h2>
-                        <div className="input-field">
-                            <input type="text" placeholder="Name"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                            />
-                        </div>
-                        <div className="input-field">
-                            <input type="text" placeholder="E-mail"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                            />
-                        </div>
-                        <div className="input-field password-field">
-                            <input type={isPassVisible ? "text" : "password"} placeholder="Password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                            />
-                            <span onClick={() => setPassVisible(!isPassVisible)}>{isPassVisible ? "Hide" : "Show"}</span>
-                        </div>
-                        <div className="file-field input-field">
-                            <div className="btn #64b5f6 blue darken-2">
-                                <span>Upload Profile</span>
-                                <input type="file" onChange={(e) => setImage(e.target.files[0])}/>
+                <section className='form-main-container'>
+                    <section>
+                        <img src='https://res.cloudinary.com/getgrouped/image/upload/v1609421382/White_and_Pink_Strikeout_Cosmetics_Beauty_Logo_ymim3g.png'
+                            alt='main-logo'
+                        />
+                    </section>
+                    <section className="signup-form">
+                        <div className="card">
+                            <h2>Umix</h2>
+                            <div className="input-field">
+                                <input type="text" placeholder="Name"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                />
                             </div>
-                            <div className="file-path-wrapper">
-                                <input className="file-path validate" type="text"/>
+                            <div className="input-field">
+                                <input type="text" placeholder="E-mail"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                />
                             </div>
+                            <div className="input-field password-field">
+                                <input type={isPassVisible ? "text" : "password"} placeholder="Password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                />
+                                <span onClick={() => setPassVisible(!isPassVisible)}>{isPassVisible ? "Hide" : "Show"}</span>
+                            </div>
+                            <div className="file-field input-field">
+                                <div className="btn #64b5f6 blue darken-2">
+                                    <span>Upload Profile</span>
+                                    <input type="file" onChange={(e) => setImage(e.target.files[0])}/>
+                                </div>
+                                <div className="file-path-wrapper">
+                                    <input className="file-path validate" type="text"/>
+                                </div>
+                            </div>
+                            <button onClick={submitData} className="btn waves-effect waves-light #64b5f6 blue darken-2">Register</button>
+                            <h6>Have an account? <Link className="blue-text lighten-2" to="/login">Log in</Link></h6>
                         </div>
-                        <button onClick={submitData} className="btn waves-effect waves-light #64b5f6 blue darken-2">Register</button>
-                        <h6>Have an account? <Link className="blue-text lighten-2" to="/login">Log in</Link></h6>
-                    </div>
+                    </section>
                 </section>
             }
         </>
