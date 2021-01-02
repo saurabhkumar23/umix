@@ -120,30 +120,6 @@
 }
 
 .home {
-    .main-head{
-        padding: 17px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        .profile-link{
-            display: flex;
-            align-items: center;
-            h5{
-                margin: 0;
-                margin-left: 10px;
-                font-size: 1.2em;
-            }
-        }
-        a{
-            color: black;
-        }
-    }
-    .side-image{
-        object-fit: cover;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-    }
     .card {
         max-width: 500px;
         height: max-content;
@@ -151,27 +127,55 @@
         .heart-icon {
             color : #ef5350 !important;
         }
-    }
-    .card-content{
-        input{
-            border: none;
-            border-top: 1px solid #d6d4d4;
-            &:focus{
-                box-shadow: none !important;
-                border-bottom: none !important;
-            }
-        }
-        .comment-box{
-            margin: 15px 0;
-            p span{
-                font-size: 1.3em;
-                font-weight: 500;
-                margin-right: 10px;
+        .main-head{
+            padding: 17px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .profile-link{
+                display: flex;
+                align-items: center;
+                h5{
+                    margin: 0;
+                    margin-left: 10px;
+                    font-size: 1.2em;
+                }
+                .side-image{
+                    object-fit: cover;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                }
             }
             a{
                 color: black;
             }
         }
+        .card-content{
+            input{
+                border: none;
+                border-top: 1px solid #d6d4d4;
+                &:focus{
+                    box-shadow: none !important;
+                    border-bottom: none !important;
+                }
+            }
+            .comment-box{
+                margin: 15px 0;
+                p span{
+                    font-size: 1.3em;
+                    font-weight: 500;
+                    margin-right: 10px;
+                }
+                a{
+                    color: black;
+                }
+            }
+        }
+    }
+    .pagination{
+        text-align: center;
+        margin-bottom: 100px;
     }
 }
 

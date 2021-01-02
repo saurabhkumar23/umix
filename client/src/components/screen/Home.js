@@ -3,13 +3,20 @@ import {Link,useHistory} from 'react-router-dom';
 import {UserContext} from '../../App'
 import Loading from './Loading'
 import M from 'materialize-css'
+import Pagination from './Pagination'
 
 const Home = () => {
 
-    const history = useHistory()
-    const [data,setData] = useState([])
     const [loading,setLoading] = useState(false)
     const {state,dispatch} = useContext(UserContext)
+    const history = useHistory()
+
+    const [data,setData] = useState([])
+    const [currentPage,setCurrentPage] = useState(1)
+    const postsPerPage = 5
+    const indexOfLastPost = currentPage*postsPerPage
+    const indexOfFirstPost = indexOfLastPost-postsPerPage
+    const currentPosts = data.slice(indexOfFirstPost,indexOfLastPost)
 
     // api call to fetch all posts from DB
     useEffect(() => {
@@ -32,6 +39,9 @@ const Home = () => {
         })
         .catch((error) => console.log(error))
     },[])
+
+    //function for pagination 
+    const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
     // api call to update likes on a post
     const likePost = (id) => {
@@ -148,7 +158,7 @@ const Home = () => {
                 loading || !state ? <Loading/> :
                 <section className="home">
                     {
-                        data.map((item) => {
+                        currentPosts.map((item) => {
                             return (
                                 <div className="card" key={item._id}>
                                     <div className='main-head'>
@@ -203,6 +213,7 @@ const Home = () => {
                             )
                         })
                     }
+                    <Pagination postsPerPage={postsPerPage} totalPosts={data.length} paginate={paginate} currentPage={currentPage}/>
                 </section> 
             }
         </>
