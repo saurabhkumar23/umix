@@ -21,13 +21,13 @@ module.exports.showAllPosts = (req,res) => {
 
 module.exports.createPost = (req,res) => {
     //fetch data
-    const {title,body,photo} = req.body
+    const {title,photo} = req.body
     //validation
-    if(!title || !body || !photo){
+    if(!title || !photo){
         return res.status(404).json({error : 'Please fill all the fields'})
     }
     //save data to DB
-    const newPost = new Post({title,body,photo,postedBy:req.user})
+    const newPost = new Post({title,photo,postedBy:req.user})
     newPost.save()
     .then((post) => res.json({message : 'post created successfully!'}))
     .catch((error) => res.status(404).json({error : error}))

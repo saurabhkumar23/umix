@@ -7,7 +7,6 @@ const CreatePost = () => {
 
     const history = useHistory()
     const [title, setTitle] = useState('')
-    const [body, setBody] = useState('')
     const [image, setImage] = useState('')
     const [url,setUrl] = useState('')
     const [loading,setLoading] = useState(false)
@@ -21,7 +20,7 @@ const CreatePost = () => {
                     "Content-Type" : "application/json",
                     "Authorization" : `Bearer ${localStorage.getItem('jwt')}`
                 },
-                body : JSON.stringify({title,body,photo:url})
+                body : JSON.stringify({title,photo:url})
             })
             .then((res) => res.json())
             .then((data) => {
@@ -41,7 +40,7 @@ const CreatePost = () => {
 
     // submit image data to cloudinary and get the url back for posting data to DB
     const postDetails = () => {
-        if(!title || !body || !image){
+        if(!title || !image){
             M.toast({html: 'Please fill all the fields',classes:"#c62828 red darken-3"})
             return
         }
@@ -68,9 +67,6 @@ const CreatePost = () => {
                     <h2>Umix</h2>
                     <div className="input-field">
                         <input type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)}/>
-                    </div>
-                    <div className="input-field">
-                        <input type="text" placeholder="Body" value={body} onChange={(e) => setBody(e.target.value)}/>
                     </div>
                     <div className="file-field input-field">
                         <div className="btn #64b5f6 blue darken-2">

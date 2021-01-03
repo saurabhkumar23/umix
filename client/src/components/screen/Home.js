@@ -186,7 +186,6 @@ const Home = () => {
                                             }                                
                                             <h6>{item.likes.length} Likes</h6>
                                             <h6>{item.title}</h6>
-                                            <p>{item.body}</p>
                                         </div>
                                         <div className='comment-box'>
                                             {

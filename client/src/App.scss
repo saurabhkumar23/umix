@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap');
 
+html{
+    scroll-behavior: smooth;
+}
+
 #navbar {
     nav {
         padding: 0 100px;

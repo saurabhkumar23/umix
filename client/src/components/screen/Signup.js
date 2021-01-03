@@ -70,7 +70,7 @@ const Signup = () => {
             uploadPic()
         }
         else{
-            setUrl("https://res.cloudinary.com/getgrouped/image/upload/v1606821978/User-Default_mwzmy3.jpg")
+            setUrl("https://res.cloudinary.com/getgrouped/image/upload/v1609654648/lpg4cpnvw35nsflgiyyo.jpg")
         }
     }
 
