@@ -7,6 +7,7 @@ import Login from './components/screen/Login';
 import Signup from './components/screen/Signup';
 import Profile from './components/screen/Profile';
 import CreatePost from './components/screen/CreatePost';
+import EditPost from './components/screen/EditPost';
 import UserProfile from './components/screen/UserProfile';
 import ResetPass from './components/screen/ResetPass';
 import NewPass from './components/screen/NewPass';
@@ -42,6 +43,7 @@ const Routing = () => {
                 <Route exact path='/signup' component={Signup}/>
                 <Route exact path='/profile' component={Profile}/>
                 <Route exact path='/create' component={CreatePost}/>
+                <Route exact path='/:postid/edit' component={EditPost}/>
                 <Route exact path='/profile/:userid' component={UserProfile}/>
                 <Route exact path='/resetPass' component={ResetPass}/>
                 <Route exact path='/resetPass/:token' component={NewPass}/>

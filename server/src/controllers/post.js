@@ -19,6 +19,13 @@ module.exports.showAllPosts = (req,res) => {
     .catch((error) => res.status(404).json({error : error}))
 }
 
+module.exports.showPost = (req,res) => {
+    Post.find({_id : req.params.postId})
+    .populate('postedBy','_id name')
+    .then((post) => res.json({post}))
+    .catch((error) => res.status(404).json({error : error}))
+}
+
 module.exports.createPost = (req,res) => {
     //fetch data
     const {title,photo} = req.body
@@ -31,6 +38,18 @@ module.exports.createPost = (req,res) => {
     newPost.save()
     .then((post) => res.json({message : 'post created successfully!'}))
     .catch((error) => res.status(404).json({error : error}))
+}
+
+module.exports.editPost = (req,res) => {
+    const {title,photo} = req.body
+    Post.findByIdAndUpdate(req.body.postid,{title,photo},{new:true})
+    .populate('comments.postedBy','_id name')
+    .populate('postedBy','_id name photo')
+    .exec((error,result) => {
+        if(error)
+            return res.status(422).json({error : error})
+        return res.json(result)
+    })
 }
 
 module.exports.likePost = (req,res) => {

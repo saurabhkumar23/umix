@@ -1,7 +1,7 @@
 ////////////// require ////////////////
 const express = require('express')
 const requireLogin = require('../middleware/requireLogin')
-const {showMyPosts,showAllPosts,createPost,likePost,unlikePost,commentPost,deletePost,deleteCommentPost} = require('../controllers/post')
+const {showMyPosts,showAllPosts,showPost,createPost,editPost,likePost,unlikePost,commentPost,deletePost,deleteCommentPost} = require('../controllers/post')
 const router = express.Router()
 
 /////////////// routes ////////////////
@@ -12,8 +12,14 @@ router.get('/showMyPost',requireLogin,showMyPosts)
 //SHOW ALL POST
 router.get('/showAllPost',requireLogin,showAllPosts)
 
+//SHOW POST by ID
+router.get('/show/:postId',requireLogin,showPost)
+
 //CREATE POST
 router.post('/createPost',requireLogin,createPost)
+
+//EDIT POST
+router.put('/editPost',requireLogin,editPost)
 
 //LIKES on a post
 router.put('/like',requireLogin,likePost)

@@ -171,7 +171,13 @@ const Home = () => {
                                             </h5>
                                         </div>
                                         <div>
-                                            {item.postedBy._id === state._id ? <i style={{float:'right'}} className="material-icons" onClick={() => deletePost(item._id)}>delete</i> : null}
+                                        {
+                                            item.postedBy._id !== state._id ? null :
+                                            <div>
+                                                <i style={{float:'right'}} className="material-icons"><Link to={`/${item._id}/edit`}>create</Link></i>
+                                                <i style={{float:'right'}} className="material-icons" onClick={() => deletePost(item._id)}>delete</i>
+                                            </div>
+                                        }
                                         </div>
                                     </div>
                                     <div className="card-image">
