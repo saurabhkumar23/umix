@@ -34,7 +34,7 @@ router.put('/comment',requireLogin,commentPost)
 router.delete('/deletePost/:postId',requireLogin,deletePost)
 
 //DELETE a comment
-router.delete('/deleteComment/:commentId',requireLogin,deleteCommentPost)
+router.put('/deleteComment',requireLogin,deleteCommentPost)
 
 ///////////// export //////////////////
 module.exports = router

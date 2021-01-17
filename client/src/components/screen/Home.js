@@ -132,24 +132,25 @@ const Home = () => {
     }
 
     //api call to delete a comment
-    const deleteComment = (commentId,postId) => {
-        console.log(commentId, postId)
-        // fetch(`/deleteComment/${commentId}`,{
-        //     method : 'delete',
-        //     headers :{
-        //         "Authorization" : `Bearer ${localStorage.getItem("jwt")}`,
-        //         "Content-Type" : "application/json"
-        //     },
-        //     body : JSON.stringify({postId})
-        // })
-        // .then((res) => res.json())
-        // .then((result) => {
-        //     console.log(result)
-        //     // const newData = data.filter((item) => {
-        //     //     return item._id!==result._id
-        //     // })
-        //     // setData(newData)
-        // })
+    const deleteComment = (commentId,commentText,commentPostedBy,postId) => {
+        fetch(`/deleteComment`,{
+            method : 'put',
+            headers :{
+                "Authorization" : `Bearer ${localStorage.getItem("jwt")}`,
+                "Content-Type" : "application/json"
+            },
+            body : JSON.stringify({commentId,commentText,commentPostedBy,postId})
+        })
+        .then((res) => res.json())
+        .then((result) => {
+            const newData = data.map((item) => {
+                if(item._id==result._id)
+                    return result
+                else
+                    return item
+            })
+            setData(newData)
+        })
     }
 
     return (
@@ -203,7 +204,11 @@ const Home = () => {
                                                     </Link>
                                                     </span> 
                                                     {comment.text}
-                                                    {comment.postedBy._id === state._id ? <i style={{float:'right'}} className="material-icons" onClick={() => deleteComment(comment._id,item._id)}>delete</i> : null}
+                                                    {comment.postedBy._id === state._id ? 
+                                                    <i style={{float:'right'}} className="material-icons" 
+                                                    onClick={() => deleteComment(comment._id,comment.text,comment.postedBy,item._id)}>
+                                                    delete
+                                                    </i> : null}
                                                 </p>
                                                 )
                                             }

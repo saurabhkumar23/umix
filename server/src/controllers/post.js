@@ -112,27 +112,19 @@ module.exports.deletePost = (req,res) => {
 }
 
 module.exports.deleteCommentPost = (req,res) => {
-    // Post.findOne({_id:req.body.postId})
-    // .populate('postedBy','_id')
-    // .exec((error,post) => {
-    //     if(error)
-    //         return res.status(422).json({error:error})
-    //     if(post.postedBy._id.toString() === req.user._id.toString()){
-    //         post.remove()
-    //         .then(result => {
-    //             return res.json(result)
-    //         })
-    //         .catch((error) => res.status(404).json({error : error}))
-    //     }
-    // })
-    // Post.findByIdAndUpdate(req.body.postId,{
-    //     $pull : {comments : req.params.commentId}
-    // },{new:true})
-    // .populate('comments.postedBy','_id name')
-    // .populate('postedBy','_id name photo')
-    // .exec((error,result) => {
-    //     if(error)
-    //         return res.status(422).json({error : error})
-    //     return res.json(result)
-    // })
+    const comment = {
+        _id : req.body.commentId,
+        text : req.body.commentText,
+        postedBy : req.body.commentPostedBy
+    }
+    Post.findByIdAndUpdate(req.body.postId,{
+        $pull : {comments : comment}
+    },{new:true})
+    .populate('comments.postedBy','_id name')
+    .populate('postedBy','_id name photo')
+    .exec((error,result) => {
+        if(error)
+            return res.status(422).json({error : error})
+        return res.json(result)
+    })
 }
