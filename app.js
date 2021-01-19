@@ -1,7 +1,7 @@
 /////////////////////// require /////////////////////
 const express = require('express')
 const mongoose = require('mongoose')
-const {MONGO_URI} = require('../config/keys')
+const {MONGO_URI} = require('./config/keys')
 const app = express()
 const path = require('path')
 
@@ -12,9 +12,9 @@ mongoose.connect(MONGO_URI,{useNewUrlParser: true,useUnifiedTopology: true})
 
 //////////////////// routes configuration /////////////////
 app.use(express.json())
-app.use(require('./routes/auth'))
-app.use(require('./routes/post')) 
-app.use(require('./routes/user'))
+app.use(require('./src/routes/auth'))
+app.use(require('./src/routes/post')) 
+app.use(require('./src/routes/user'))
 
 //if application is in production, serve static files
 if(process.env.NODE_ENV === "production"){
