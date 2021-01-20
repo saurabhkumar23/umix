@@ -90,7 +90,7 @@ const Profile = () => {
                             <div>
                                 <div className='pic-container'>
                                     <div className='pic'>
-                                        {loading ? <Loading/> : <img src={state.photo} alt="profile-image"/> }
+                                        {loading ? <Loading/> : <img src={state.photo} alt="profile"/> }
                                     </div>
                                 </div>
                                 <div className="file-field input-field">
@@ -113,10 +113,10 @@ const Profile = () => {
                                 </div>
                             </div>
                         </div>
-                        <div class="row profile-gallery">
+                        <div className="row profile-gallery">
                                 {
-                                    posts.map((post) => <div class="col xl4 m6">
-                                        <img key={post._id} src={post.photo} alt={post.title}/>
+                                    posts.map((post) => <div key={post._id} className="col xl4 m6">
+                                        <img src={post.photo} alt={post.title}/>
                                         </div>)
                                 }
                         </div>
