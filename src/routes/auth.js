@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const {signupValidations,signup,signinValidations,signin,resetPassValidations,resetPassword,newPassValidations,newPassword} = require('../controllers/auth')
+const {signupValidations,signup,signinValidations,signin,resetPassValidations
+    ,resetPassword,newPassValidations,newPassword} = require('../controllers/auth')
 
 // SIGNUP 
 router.post('/signup',signupValidations,signup)

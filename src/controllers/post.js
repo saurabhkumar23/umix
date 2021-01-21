@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const User = require('../models/user')
 const Post = require('../models/post')
 
+//********************************** SHOW MY POST ****************************//
 module.exports.showMyPosts = (req,res) => {
     Post.find({postedBy : req.user._id})
     .populate('postedBy','_id name')
@@ -10,6 +11,7 @@ module.exports.showMyPosts = (req,res) => {
     .catch((error) => res.status(404).json({error : error}))
 }
 
+//********************************** SHOW ALL POST ****************************//
 module.exports.showAllPosts = (req,res) => {
     Post.find()
     .populate('postedBy','_id name photo')
@@ -19,6 +21,7 @@ module.exports.showAllPosts = (req,res) => {
     .catch((error) => res.status(404).json({error : error}))
 }
 
+//********************************** SHOW A POST ****************************//
 module.exports.showPost = (req,res) => {
     Post.find({_id : req.params.postId})
     .populate('postedBy','_id name')
@@ -26,6 +29,7 @@ module.exports.showPost = (req,res) => {
     .catch((error) => res.status(404).json({error : error}))
 }
 
+//********************************** CREATE POST ****************************//
 module.exports.createPost = (req,res) => {
     //fetch data
     const {title,photo} = req.body
@@ -40,6 +44,7 @@ module.exports.createPost = (req,res) => {
     .catch((error) => res.status(404).json({error : error}))
 }
 
+//********************************** EDIT POST ****************************//
 module.exports.editPost = (req,res) => {
     const {title,photo} = req.body
     Post.findByIdAndUpdate(req.body.postid,{title,photo},{new:true})
@@ -52,6 +57,7 @@ module.exports.editPost = (req,res) => {
     })
 }
 
+//********************************** lIKE POST ****************************//
 module.exports.likePost = (req,res) => {
     Post.findByIdAndUpdate(req.body.postId,{
         $push : {likes : req.user._id}
@@ -65,6 +71,7 @@ module.exports.likePost = (req,res) => {
     })
 }
 
+//********************************** UNLIKE POST ****************************//
 module.exports.unlikePost = (req,res) => {
     Post.findByIdAndUpdate(req.body.postId,{
         $pull : {likes : req.user._id}
@@ -78,6 +85,7 @@ module.exports.unlikePost = (req,res) => {
     })
 }
 
+//********************************** COMMENT ON POST ****************************//
 module.exports.commentPost = (req,res) => {
     const comment = {
         text : req.body.text,
@@ -95,6 +103,7 @@ module.exports.commentPost = (req,res) => {
     })
 }
 
+//********************************** DELETE POST ****************************//
 module.exports.deletePost = (req,res) => {
     Post.findOne({_id:req.params.postId})
     .populate('postedBy','_id')
@@ -111,6 +120,7 @@ module.exports.deletePost = (req,res) => {
     })
 }
 
+//********************************** DELETE COMMENT ON POST ****************************//
 module.exports.deleteCommentPost = (req,res) => {
     const comment = {
         _id : req.body.commentId,

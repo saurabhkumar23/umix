@@ -8,8 +8,9 @@ const Signup = () => {
 
     const history = useHistory()
     const {state,dispatch} = useContext(UserContext)
-    const [loading,setLoading] = useState(false)
 
+    //usestates
+    const [loading,setLoading] = useState(false)
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -17,11 +18,12 @@ const Signup = () => {
     const [image, setImage] = useState('')
     const [url,setUrl] = useState('')
 
+    // redirect to home, if already logged in
     useEffect(() => {
         if(state){
             history.push('/')
         }
-    })
+    },[])
 
      // api call to create a user
     useEffect(() => {
@@ -49,7 +51,7 @@ const Signup = () => {
         }
     },[url])
 
-    // submit image data to cloudinary and get the url back for posting data to DB
+    // submit image data to cloudinary and get the url back 
     const uploadPic = () => {
             const data = new FormData()
             data.append('file',image)
@@ -63,7 +65,8 @@ const Signup = () => {
             .then((data) => setUrl(data.url))
             .catch((error) => console.log(error))
     }
-        
+    
+    // function for creating a new user
     const submitData = () => {
         setLoading(true)
         if(image){

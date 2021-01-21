@@ -7,10 +7,12 @@ const UserSearch = () => {
 
     const {state,dispatch} = useContext(UserContext)
     const searchModal = useRef(null)
+
+    //usestates
     const[search,setSearch] = useState('')
     const [searchUsers,setSearchUsers] = useState([])
 
-    // initialise modal
+    // initialise search modal
     useEffect(() => {
         const options = {
             onCloseStart: function() {
@@ -21,6 +23,7 @@ const UserSearch = () => {
         M.Modal.init(searchModal.current,options)
     },[])
 
+    // fetching search users
     const fetchUsers = (data) => {
         setSearch(data)
         if(data){

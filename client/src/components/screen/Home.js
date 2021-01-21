@@ -7,18 +7,21 @@ import Pagination from './Pagination'
 
 const Home = () => {
 
-    const [loading,setLoading] = useState(false)
-    const {state,dispatch} = useContext(UserContext)
     const history = useHistory()
+    const {state,dispatch} = useContext(UserContext)
 
+    //usestates
+    const [loading,setLoading] = useState(false)
     const [data,setData] = useState([])
+
+    //pagination setup
     const [currentPage,setCurrentPage] = useState(1)
     const postsPerPage = 5
     const indexOfLastPost = currentPage*postsPerPage
     const indexOfFirstPost = indexOfLastPost-postsPerPage
     const currentPosts = data.slice(indexOfFirstPost,indexOfLastPost)
 
-    // api call to fetch all posts from DB
+    // api call to fetch all posts 
     useEffect(() => {
         setLoading(true)
         fetch('/showAllPost',{
@@ -65,6 +68,7 @@ const Home = () => {
         })
     }
 
+    // api call to update likes on a post
     const unlikePost = (id) => {
         fetch('/unlike',{
             method : 'put',
@@ -86,7 +90,7 @@ const Home = () => {
         })
     }
 
-    // api call to update comments on a post
+    // api call to add comment on a post
     const commentPost = (e,postId) => {
         e.preventDefault()
         if(!e.target[0].value.trim()){

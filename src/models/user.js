@@ -1,4 +1,3 @@
-////////////// require ////////////////
 const mongoose = require('mongoose')
 
 const userSchema = new mongoose.Schema({
@@ -33,5 +32,4 @@ const userSchema = new mongoose.Schema({
     expireToken : Date
 },{timestamps:true})
 
-///////////// export //////////////////
 module.exports = mongoose.model('user',userSchema)

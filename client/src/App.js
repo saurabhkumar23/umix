@@ -11,7 +11,6 @@ import EditPost from './components/screen/EditPost';
 import UserProfile from './components/screen/UserProfile';
 import ResetPass from './components/screen/ResetPass';
 import NewPass from './components/screen/NewPass';
-
 import {reducer,initialState} from './Reducers/userReducer'
 import ErrorPage from './components/screen/ErrorPage';
 
@@ -54,7 +53,9 @@ const Routing = () => {
 }
 
 const App = () => {
+
     const [state,dispatch] = useReducer(reducer,initialState)
+
     return (
         <>
             <UserContext.Provider value={{state,dispatch}}>

@@ -5,13 +5,15 @@ import M from 'materialize-css'
 
 const Profile = () => {
 
+    const {state,dispatch} = useContext(UserContext)
+
+    //usestates
     const [posts,setPosts] = useState([])
     const [image, setImage] = useState('')
     const [url,setUrl] = useState('')
     const [loading,setLoading] = useState(false)
-    const {state,dispatch} = useContext(UserContext)
 
-    // api call to fetch my post images
+    // api call to fetch my post 
     useEffect(() => {
         setLoading(true)
         fetch('/showMyPost',{
@@ -58,7 +60,7 @@ const Profile = () => {
         }
     },[url])
 
-    // submit image data to cloudinary and get the url back for posting data to DB
+    // submit image data to cloudinary and get the url back 
     useEffect(() => {
         if(image){
             setLoading(true)
@@ -76,6 +78,7 @@ const Profile = () => {
         }
     },[image])
 
+    // function to set profile pic
     const updatePhoto = (file) => {
         setImage(file)
     }

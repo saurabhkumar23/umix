@@ -1,10 +1,8 @@
-////////////// require ////////////////
 const express = require('express')
 const requireLogin = require('../middleware/requireLogin')
-const {showMyPosts,showAllPosts,showPost,createPost,editPost,likePost,unlikePost,commentPost,deletePost,deleteCommentPost} = require('../controllers/post')
+const {showMyPosts,showAllPosts,showPost,createPost,editPost
+    ,likePost,unlikePost,commentPost,deletePost,deleteCommentPost} = require('../controllers/post')
 const router = express.Router()
-
-/////////////// routes ////////////////
 
 //SHOW MY POST
 router.get('/showMyPost',requireLogin,showMyPosts)
@@ -36,7 +34,6 @@ router.delete('/deletePost/:postId',requireLogin,deletePost)
 //DELETE a comment
 router.put('/deleteComment',requireLogin,deleteCommentPost)
 
-///////////// export //////////////////
 module.exports = router
 
 

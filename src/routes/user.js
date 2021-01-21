@@ -1,10 +1,7 @@
-////////////// require ////////////////
 const express = require('express')
 const requireLogin = require('../middleware/requireLogin')
 const {getUser,followUser,unfollowUser,updatePhoto,searchUsers} = require('../controllers/user')
 const router = express.Router()
-
-/////////////// routes ////////////////
 
 //fetch a user
 router.get('/user/:id',requireLogin,getUser)
@@ -21,5 +18,4 @@ router.put('/updatePhoto',requireLogin,updatePhoto)
 //search users 
 router.post('/searchUsers',searchUsers)
 
-///////////// export //////////////////
 module.exports = router

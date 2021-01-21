@@ -6,11 +6,14 @@ import Loading from './Loading'
 const NewPass = () => {
 
     const history = useHistory()
+    const {token} = useParams()
+
+    //usestates
     const [loading,setLoading] = useState(false)
     const [password, setPassword] = useState("")
     const [isPassVisible,setPassVisible] = useState(false)
-    const {token} = useParams()
-        
+    
+    // api call to set new password
     const submitData = () => {
         setLoading(true)
         fetch("/newPassword",{

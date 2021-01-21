@@ -8,12 +8,14 @@ import Loading from './Loading'
 const UserProfile = () => {
 
     const history = useHistory()
-    const [userProfile,setUserProfile] = useState(null)
     const {state,dispatch} = useContext(UserContext)
     const {userid} = useParams()
+
+    //usestates
+    const [userProfile,setUserProfile] = useState(null)
     const [loading,setLoading] = useState(false)
 
-    // api call to fetch user details
+    // api call to fetch the user 
     useEffect(() => {
         setLoading(true)
         fetch(`/user/${userid}`,{

@@ -1,17 +1,20 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const { check,validationResult } = require('express-validator')
-const User = require('../models/user')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const {JWT_SECRET_KEY} = require('../../config/keys')
-const {SENDGRID_API_KEY} = require('../../config/keys')
 const sgMail = require('@sendgrid/mail')
 const crypto = require('crypto')
-const user = require('../models/user')
 const { match } = require('assert')
+
+const User = require('../models/user')
+const {JWT_SECRET_KEY} = require('../../config/keys')
+const {SENDGRID_API_KEY} = require('../../config/keys')
+const user = require('../models/user')
+
 sgMail.setApiKey(SENDGRID_API_KEY)
 
+//********************************** SIGNUP VALIDATIONS ****************************//
 module.exports.signupValidations = [
     check('name')
     .notEmpty()
@@ -34,6 +37,7 @@ module.exports.signupValidations = [
     .withMessage('Password must contain atmax 15 characters')
 ]
 
+//********************************** SIGNUP controller ****************************//
 module.exports.signup = (req,res) => {
     //validation
     const errors = validationResult(req)
@@ -70,6 +74,7 @@ module.exports.signup = (req,res) => {
     .catch((error) => res.status(404).json({error : error}))
 }
 
+//********************************** SIGNIN VALIDATIONS ****************************//
 module.exports.signinValidations = [
     check('email')
     .notEmpty()
@@ -81,6 +86,7 @@ module.exports.signinValidations = [
     .withMessage('Password is required')
 ]
 
+//********************************** SIGNIN controller ****************************//
 module.exports.signin = (req,res) => {
     //validation
     const errors = validationResult(req)
@@ -113,6 +119,7 @@ module.exports.signin = (req,res) => {
     .catch((error) => res.status(404).json({error : error}))
 }
 
+//********************************** RESET-PASSWORD VALIDATIONS ****************************//
 module.exports.resetPassValidations = [
     check('email')
     .notEmpty()
@@ -121,6 +128,7 @@ module.exports.resetPassValidations = [
     .withMessage('Email should be a valid email')
 ]
 
+//********************************** RESET-PASSWORD controller ****************************//
 module.exports.resetPassword = (req,res) => {
     //validation
     const errors = validationResult(req)
@@ -155,6 +163,7 @@ module.exports.resetPassword = (req,res) => {
     }) 
 }
 
+//********************************** NEW-PASSWORD VALIDATIONS ****************************//
 module.exports.newPassValidations = [
     check('password')
     .notEmpty()
@@ -165,6 +174,7 @@ module.exports.newPassValidations = [
     .withMessage('Password must contain atmax 15 characters')
 ]
 
+//********************************** NEW-PASSWORD controller ****************************//
 module.exports.newPassword = (req,res) => {
     //validation
     const errors = validationResult(req)

@@ -7,7 +7,7 @@ const ResetPass = () => {
     const history = useHistory()
     const [email, setEmail] = useState("")
 
-    // api call to backend
+    // api call to reset the password
     const submitData = () => {
         fetch("/resetPassword",{
             method : "post",

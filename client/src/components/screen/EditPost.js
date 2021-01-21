@@ -6,13 +6,15 @@ import M from 'materialize-css'
 const EditPost = () => {
 
     const history = useHistory()
+    const {postid} = useParams()
+
+    //usestates
     const [title, setTitle] = useState('')
     const [image, setImage] = useState('')
     const [url,setUrl] = useState('')
-    const {postid} = useParams()
     const [loading,setLoading] = useState(false)
 
-    //fetch post details first
+    // api call to fetch current post
     useEffect(() => {
         setLoading(true)
         fetch(`/show/${postid}`,{
@@ -35,7 +37,7 @@ const EditPost = () => {
         .catch((error) => console.log(error))
     },[])
 
-    // api call to create a post
+    // api call to update the post
     useEffect(() => {
         if(url){
             fetch("/editPost",{
@@ -62,7 +64,7 @@ const EditPost = () => {
         }
     },[url])
 
-    // submit image data to cloudinary and get the url back for posting data to DB
+    // submit image data to cloudinary and get the url back 
     const postDetails = () => {
         if(!title || !image){
             M.toast({html: 'Please fill all the fields',classes:"#c62828 red darken-3"})

@@ -6,21 +6,23 @@ import Loading from './Loading'
 
 const Login = () => {
 
-    const {state,dispatch} = useContext(UserContext)
-    const [loading,setLoading] = useState(false)
-
     const history = useHistory()
+    const {state,dispatch} = useContext(UserContext)
+
+    //usestates
+    const [loading,setLoading] = useState(false)
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [isPassVisible,setPassVisible] = useState(false)
 
+    // redirect to home, if already logged in
     useEffect(() => {
         if(state){
             history.push('/')
         }
-    })
+    },[])
 
-    // api call to backend
+    // api call to login authentication
     const submitData = () => {
         setLoading(true)
         fetch("/signin",{
@@ -38,7 +40,7 @@ const Login = () => {
             else{
                 localStorage.setItem("jwt",data.token)
                 localStorage.setItem("user",JSON.stringify(data.user))
-                dispatch({type:'USER',payload:data.user})                //update user state from null to user's data
+                dispatch({type:'USER',payload:data.user})               
                 M.toast({html: `Welcome ${data.user.name}`,classes:"#2e7d32 green darken-3"})
                 history.push('/')
             }

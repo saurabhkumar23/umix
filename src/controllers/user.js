@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const User = require('../models/user')
 const Post = require('../models/post')
 
+//********************************** GET USER ****************************//
 module.exports.getUser = (req,res) => {
     User.findOne({_id : req.params.id})
     .select('-password')
@@ -18,6 +19,7 @@ module.exports.getUser = (req,res) => {
     .catch(error =>  res.status(404).json({error:'User not found!'}))
 }
 
+//********************************** FOLLOW USER ****************************//
 module.exports.followUser = (req,res) => {
     User.findByIdAndUpdate(req.body.followId,{
         $push : {followers : req.user._id}
@@ -37,6 +39,7 @@ module.exports.followUser = (req,res) => {
     })
 }
 
+//********************************** UNFOLLOW USER ****************************//
 module.exports.unfollowUser = (req,res) => {
     User.findByIdAndUpdate(req.body.unfollowId,{
         $pull : {followers : req.user._id}
@@ -56,6 +59,7 @@ module.exports.unfollowUser = (req,res) => {
     })
 }
 
+//********************************** UPDATE USER PROFILE PIC ****************************//
 module.exports.updatePhoto = (req,res) => {
     User.findByIdAndUpdate(req.user._id,{
         $set : {photo : req.body.photo}
@@ -67,6 +71,7 @@ module.exports.updatePhoto = (req,res) => {
     })
 }
 
+//********************************** GET ALL SEARCHED USERS ****************************//
 module.exports.searchUsers = (req,res) => {
     let userPattern = new RegExp('^'+req.body.data)
     User.find({name : {$regex:userPattern}})

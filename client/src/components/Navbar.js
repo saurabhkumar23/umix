@@ -16,6 +16,7 @@ const Navbar = () => {
         history.push('/login')
     }
 
+    // function setting links based on authentication
     const renderLinks = () => {
         if(state){
             return [

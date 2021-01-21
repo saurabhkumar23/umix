@@ -6,6 +6,8 @@ import M from 'materialize-css'
 const CreatePost = () => {
 
     const history = useHistory()
+
+    //usestates
     const [title, setTitle] = useState('')
     const [image, setImage] = useState('')
     const [url,setUrl] = useState('')
@@ -38,7 +40,7 @@ const CreatePost = () => {
         }
     },[url])
 
-    // submit image data to cloudinary and get the url back for posting data to DB
+    // submit image data to cloudinary and get the url back
     const postDetails = () => {
         if(!title || !image){
             M.toast({html: 'Please fill all the fields',classes:"#c62828 red darken-3"})
