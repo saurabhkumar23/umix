@@ -13,6 +13,7 @@ import ResetPass from './components/screen/ResetPass';
 import NewPass from './components/screen/NewPass';
 import {reducer,initialState} from './Reducers/userReducer'
 import ErrorPage from './components/screen/ErrorPage';
+import MemeGenerator from './components/screen/MemeGenerator';
 
 export const UserContext = createContext()
 
@@ -46,6 +47,7 @@ const Routing = () => {
                 <Route exact path='/profile/:userid' component={UserProfile}/>
                 <Route exact path='/resetPass' component={ResetPass}/>
                 <Route exact path='/resetPass/:token' component={NewPass}/>
+                <Route exact path='/memeGenerator' component={MemeGenerator}/>
                 <Redirect to="/notFound"/>
             </Switch>
         </>

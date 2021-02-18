@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import {useHistory} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import Loading from './Loading'
 import M from 'materialize-css'
 
@@ -60,6 +60,11 @@ const CreatePost = () => {
         .catch((error) => console.log(error))
     }
 
+    const uploadHandler = (e) => {
+        console.log(e.target.files[0])
+        setImage(e.target.files[0])
+    }
+
     return (
         <>
             {
@@ -73,12 +78,17 @@ const CreatePost = () => {
                     <div className="file-field input-field">
                         <div className="btn #64b5f6 blue darken-2">
                             <span>Upload</span>
-                            <input type="file" onChange={(e) => setImage(e.target.files[0])}/>
+                            <input type="file" onChange={(e) => uploadHandler(e)}/>
                         </div>
                         <div className="file-path-wrapper">
                             <input className="file-path validate" type="text"/>
                         </div>
                     </div>
+                    <p>OR</p>
+                    <div className='input-field'>
+                        <Link to='/memeGenerator' class="waves-effect waves-light btn">Use Meme Generator</Link>
+                    </div>
+
                     <button onClick={postDetails} className="btn waves-effect waves-light #64b5f6 blue darken-2">Submit Post</button>
                 </div>
             </section>
