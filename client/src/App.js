@@ -1,19 +1,19 @@
 import React,{createContext,useEffect,useReducer,useContext} from 'react'
 import {BrowserRouter,Redirect,Route,Switch,useHistory} from 'react-router-dom';
 import './App.scss';
-import Navbar from './components/Navbar'
-import Home from './components/screen/Home';
-import Login from './components/screen/Login';
-import Signup from './components/screen/Signup';
-import Profile from './components/screen/Profile';
-import CreatePost from './components/screen/CreatePost';
-import EditPost from './components/screen/EditPost';
-import UserProfile from './components/screen/UserProfile';
-import ResetPass from './components/screen/ResetPass';
-import NewPass from './components/screen/NewPass';
+import Navbar from './components/Navbar/Navbar'
+import Home from './components/screen/Home/Home';
+import Login from './components/screen/Login/Login';
+import Signup from './components/screen/Signup/Signup';
+import Profile from './components/screen/Profile/Profile';
+import CreatePost from './components/screen/CreatePost/CreatePost';
+import EditPost from './components/screen/EditPost/EditPost';
+import UserProfile from './components/screen/Profile/UserProfile';
+import ResetPass from './components/screen/ResetPass/ResetPass';
+import NewPass from './components/screen/NewPass/NewPass';
 import {reducer,initialState} from './Reducers/userReducer'
 import ErrorPage from './components/screen/ErrorPage';
-import MemeGenerator from './components/screen/MemeGenerator';
+import MemeGenerator from './components/screen/MemeGenerator/MemeGenerator';
 
 export const UserContext = createContext()
 
@@ -24,6 +24,7 @@ const Routing = () => {
 
     // initial user configuration on App refresh
     useEffect(() => {
+        localStorage.clear();
         const user = JSON.parse(localStorage.getItem("user"))
         if(user){
             dispatch({type:"USER",payload:user})

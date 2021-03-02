@@ -31,7 +31,7 @@ const ResetPass = () => {
 
     return (
                 <section className='form-main-container'>
-                    <section>
+                    <section className='logo'>
                         <img src='https://res.cloudinary.com/getgrouped/image/upload/v1609421382/White_and_Pink_Strikeout_Cosmetics_Beauty_Logo_ymim3g.png'
                             alt='main-logo'
                         />

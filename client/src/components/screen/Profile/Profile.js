@@ -1,6 +1,6 @@
 import React,{useState,useEffect,useContext} from 'react'
-import {UserContext} from '../../App'
-import Loading from './Loading'
+import {UserContext} from '../../../App'
+import Loading from '../Loading'
 import M from 'materialize-css'
 
 const Profile = () => {
@@ -118,7 +118,7 @@ const Profile = () => {
                         </div>
                         <div className="row profile-gallery">
                                 {
-                                    posts.map((post) => <div key={post._id} className="col xl4 m6">
+                                    posts.map((post) => <div key={post._id} className="col xl4 s6">
                                         <img src={post.photo} alt={post.title}/>
                                         </div>)
                                 }

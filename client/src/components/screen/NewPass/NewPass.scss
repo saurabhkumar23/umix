@@ -1,0 +1,50 @@
+.form-main-container{
+    display: flex;
+    justify-content: space-evenly;
+    .new-password-form{
+        h2 {
+            font-family: 'Grand Hotel', cursive;
+        }
+        .card  {
+            padding: 70px 20px;
+            text-align: center;
+            width: 400px;
+            margin: 80px auto;
+        }
+        .input-field input[type=text]:focus {
+            border-bottom: 1px solid #64b5f6;
+            box-shadow: 0 1px 0 0  #64b5f6;
+        }
+        .input-field input[type=password]:focus {
+            border-bottom: 1px solid #64b5f6;
+            box-shadow: 0 1px 0 0  #64b5f6;
+        }
+        h6 {
+            margin: 30px;
+        }
+        margin-right: 150px;
+        .password-field{
+            position: relative;
+            span{
+                position: absolute;
+                top: 15px;
+                right: 5px;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+@media (max-width: 576px){
+    .form-main-container{
+        .logo{
+            display: none;
+        }
+        .new-password-form{
+            margin-right: 0 !important;
+            .card{
+                max-width: 350px;
+            }
+        }
+    }
+}

@@ -1,9 +1,9 @@
 import React,{useState,useEffect,useContext,useRef} from 'react'
 import {Link,useHistory} from 'react-router-dom';
-import {UserContext} from '../../App'
-import Loading from './Loading'
+import {UserContext} from '../../../App'
+import Loading from '../Loading'
 import M from 'materialize-css'
-import Pagination from './Pagination'
+import Pagination from '../Pagination'
 
 const Home = () => {
 

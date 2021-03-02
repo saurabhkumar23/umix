@@ -1,9 +1,9 @@
 import React,{useState,useEffect,useContext} from 'react'
 import {useParams,Link} from 'react-router-dom'
-import {UserContext} from '../../App'
+import {UserContext} from '../../../App'
 import {useHistory} from 'react-router-dom';
 import M from 'materialize-css'
-import Loading from './Loading'
+import Loading from '../Loading'
 
 const UserProfile = () => {
 
@@ -119,7 +119,7 @@ const UserProfile = () => {
                         </div>
                         <div className="row profile-gallery">
                                 {
-                                    userProfile.posts.map((post) => <div key={post._id} className="col xl4 m6">
+                                    userProfile.posts.map((post) => <div key={post._id} className="col xl4 s6">
                                         <img  src={post.photo} alt={post.title}/>
                                         </div>)
                                 }

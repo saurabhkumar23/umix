@@ -1,8 +1,8 @@
 import React,{useState,useEffect,useContext} from 'react'
 import {Link,useHistory} from 'react-router-dom';
 import M from 'materialize-css'
-import {UserContext} from '../../App'
-import Loading from './Loading'
+import {UserContext} from '../../../App'
+import Loading from '../Loading'
 
 const Signup = () => {
 
@@ -82,7 +82,7 @@ const Signup = () => {
             {
                 loading ? <Loading/> :
                 <section className='form-main-container'>
-                    <section>
+                    <section className='logo'>
                         <img src='https://res.cloudinary.com/getgrouped/image/upload/v1609421382/White_and_Pink_Strikeout_Cosmetics_Beauty_Logo_ymim3g.png'
                             alt='main-logo'
                         />

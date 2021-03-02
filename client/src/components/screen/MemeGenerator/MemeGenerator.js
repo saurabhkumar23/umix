@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from 'react'
 import {Link} from 'react-router-dom'
-import Loading from './Loading'
+import Loading from '../Loading'
 import M from 'materialize-css'
 
 const MemeGenerator = () => {
@@ -91,7 +91,7 @@ const MemeGenerator = () => {
                 <section className='meme-container'>
                     <div className='container'>
                         <div className='row'>
-                            <div className='col s6 left-box'>
+                            <div className='col s12 m6 left-box'>
                                 <h3 className='center-align'>GENERATE YOUR MEME!</h3>
                                 <div className='col s12'>
                                     {
@@ -108,7 +108,7 @@ const MemeGenerator = () => {
                                     <Link to='/create' className="btn waves-effect waves-light #840b3b pink darken-2">Back</Link>
                                 </div>
                             </div>
-                            <div className='col s6 right-box'>
+                            <div className='col s12 m6 right-box'>
                                 <div className='card'>
                                     <div className='card-image'>
                                         {

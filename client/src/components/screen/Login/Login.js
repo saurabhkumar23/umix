@@ -1,27 +1,36 @@
-import React,{useState,useEffect} from 'react'
-import {Link,useHistory, useParams} from 'react-router-dom';
+import React,{useState,useContext, useEffect} from 'react'
+import {Link,useHistory} from 'react-router-dom';
 import M from 'materialize-css'
-import Loading from './Loading'
+import {UserContext} from '../../../App'
+import Loading from '../Loading'
 
-const NewPass = () => {
+const Login = () => {
 
     const history = useHistory()
-    const {token} = useParams()
+    const {state,dispatch} = useContext(UserContext)
 
     //usestates
     const [loading,setLoading] = useState(false)
+    const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [isPassVisible,setPassVisible] = useState(false)
-    
-    // api call to set new password
+
+    // redirect to home, if already logged in
+    useEffect(() => {
+        if(state){
+            history.push('/')
+        }
+    },[])
+
+    // api call to login authentication
     const submitData = () => {
         setLoading(true)
-        fetch("/newPassword",{
+        fetch("/signin",{
             method : "post",
             headers : {
                 "Content-Type" : "application/json"
             },
-            body : JSON.stringify({token,password})
+            body : JSON.stringify({email,password})
         })
         .then((res) => res.json())
         .then((data) => {
@@ -29,8 +38,11 @@ const NewPass = () => {
                 M.toast({html: data.error,classes:"#c62828 red darken-3"})
             }
             else{
-                M.toast({html: data.message,classes:"#2e7d32 green darken-3"})
-                history.push('/login')
+                localStorage.setItem("jwt",data.token)
+                localStorage.setItem("user",JSON.stringify(data.user))
+                dispatch({type:'USER',payload:data.user})               
+                M.toast({html: `Welcome ${data.user.name}`,classes:"#2e7d32 green darken-3"})
+                history.push('/')
             }
             setLoading(false)
         })
@@ -42,14 +54,20 @@ const NewPass = () => {
             {
                 loading ? <Loading/> :
                 <section className='form-main-container'>
-                    <section>
+                    <section className='logo'>
                         <img src='https://res.cloudinary.com/getgrouped/image/upload/v1609421382/White_and_Pink_Strikeout_Cosmetics_Beauty_Logo_ymim3g.png'
                             alt='main-logo'
                         />
                     </section>
-                    <section className="new-password-form">
+                    <section className="login-form">
                         <div className="card">
                             <h2>Umix</h2>
+                            <div className="input-field">
+                                <input type="text" placeholder="E-mail"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                />
+                            </div>
                             <div className="input-field password-field">
                                 <input type={isPassVisible ? "text" : "password"} placeholder="Password"
                                     value={password}
@@ -57,17 +75,21 @@ const NewPass = () => {
                                 />
                                 <span onClick={() => setPassVisible(!isPassVisible)}>{isPassVisible ? "Hide" : "Show"}</span>
                             </div>
-                            <button onClick={submitData} className="btn waves-effect waves-light #64b5f6 blue darken-2">Update</button>
+                            <button onClick={submitData} className="btn waves-effect waves-light #64b5f6 blue darken-2">Login</button>
+                            <hr style={{marginTop:'20px', width:'50%'}}/>
+                            <Link to='/resetPass' className='blue-text text-darken-4'>Forgot Password?</Link>
+                            <h6>Don't have an account? <Link className="blue-text lighten-2" to="/signup">Sign up</Link></h6>
                         </div>
                     </section>
                 </section>
+                
             }
         </>
         
     );
 }
 
-export default NewPass
+export default Login
 
 
 
