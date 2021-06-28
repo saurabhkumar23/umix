@@ -11,7 +11,6 @@ const Home = () => {
     const {state,dispatch} = useContext(UserContext)
 
     //usestates
-    const dropdownBox = useRef(null)
     const [loading,setLoading] = useState(false)
     const [data,setData] = useState([])
 
@@ -21,11 +20,6 @@ const Home = () => {
     const indexOfLastPost = currentPage*postsPerPage
     const indexOfFirstPost = indexOfLastPost-postsPerPage
     const currentPosts = data.slice(indexOfFirstPost,indexOfLastPost)
-
-    // dropdown
-    useEffect(() => {
-        M.Dropdown.init(dropdownBox.current)
-    })
 
     // api call to fetch all posts 
     useEffect(() => {
@@ -187,21 +181,6 @@ const Home = () => {
                                             <div>
                                                 <i style={{float:'right'}} className="material-icons"><Link to={`/${item._id}/edit`}>create</Link></i>
                                                 <i style={{float:'right'}} className="material-icons" onClick={() => deletePost(item._id)}>delete</i>
-                                            
-                                                <div>
-                                                    <a class='dropdown-trigger btn' href='#' data-target='dropdown1' ref={dropdownBox}>Drop Me!</a>
-
-                                                    <ul id='dropdown1' class='dropdown-content'>
-                                                        <li><a href="#!">one</a></li>
-                                                        <li><a href="#!">two</a></li>
-                                                        <li class="divider" tabindex="-1"></li>
-                                                        <li><a href="#!">three</a></li>
-                                                        <li><a href="#!"><i class="material-icons">view_module</i>four</a></li>
-                                                        <li><a href="#!"><i class="material-icons">cloud</i>five</a></li>
-                                                    </ul>
-                                                </div>
-                                                
-                                            
                                             </div>
                                         }
                                         </div>
