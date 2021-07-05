@@ -10,10 +10,11 @@ This repository is still under development and I will continue to add more featu
 
 - Posts
   - Create posts (or using meme generator)
-  - Like posts
-  - Comment on posts 
   - Edit post
   - Delete Post
+  - Like/Unlike posts
+  - Add or Delete a Comment
+
 ######
 
 - Search for users based on usernames
