@@ -1,4 +1,4 @@
-import React,{useContext,useEffect,useState,useRef} from 'react'
+import React,{useContext,useEffect,useRef} from 'react'
 import {Link,useHistory} from 'react-router-dom';
 import {UserContext} from '../../App'
 import M from 'materialize-css'
@@ -69,7 +69,7 @@ const Navbar = () => {
                 <nav>
                     <div class="nav-wrapper white">
                         <Link to={state ? "/" : "/login"} className="brand-logo">Umix</Link>
-                        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                        <a data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                         <ul class="right hide-on-med-and-down">
                             {renderLinks()}
                         </ul>

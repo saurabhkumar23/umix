@@ -19,7 +19,7 @@ export const UserContext = createContext()
 
 const Routing = () => {
 
-    const {state,dispatch} = useContext(UserContext)
+    const {dispatch} = useContext(UserContext)
     const history = useHistory()
 
     // initial user configuration on App refresh

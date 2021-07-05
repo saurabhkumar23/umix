@@ -15,7 +15,9 @@ This repository is still under development and I will continue to add more featu
   - Edit post
   - Delete Post
 ######
+
 - Search for users based on usernames
+
 ######
 - Profile Screen
   - Follow / Unfollow Users

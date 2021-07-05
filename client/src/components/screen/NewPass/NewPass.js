@@ -1,5 +1,5 @@
-import React,{useState,useEffect} from 'react'
-import {Link,useHistory, useParams} from 'react-router-dom';
+import React,{useState} from 'react'
+import {useHistory, useParams} from 'react-router-dom';
 import M from 'materialize-css'
 import Loading from '../Loading'
 

@@ -1,4 +1,4 @@
-import React,{useState,useEffect,useContext,useRef} from 'react'
+import React,{useState,useEffect,useContext} from 'react'
 import {Link,useHistory} from 'react-router-dom';
 import {UserContext} from '../../../App'
 import Loading from '../Loading'
@@ -8,7 +8,7 @@ import Pagination from '../Pagination'
 const Home = () => {
 
     const history = useHistory()
-    const {state,dispatch} = useContext(UserContext)
+    const {state} = useContext(UserContext)
 
     //usestates
     const [loading,setLoading] = useState(false)
@@ -59,7 +59,7 @@ const Home = () => {
         .then((res) => res.json())
         .then((result) => {
             const newData = data.map((item) => {
-                if(item._id==result._id)
+                if(item._id === result._id)
                     return result
                 else
                     return item
@@ -81,7 +81,7 @@ const Home = () => {
         .then((res) => res.json())
         .then((result) => {
             const newData = data.map((item) => {
-                if(item._id==result._id)
+                if(item._id === result._id)
                     return result
                 else
                     return item
@@ -109,7 +109,7 @@ const Home = () => {
         .then((res) => res.json())
         .then((result) => {
             const newData = data.map((item) => {
-                if(item._id==result._id)
+                if(item._id === result._id)
                     return result
                 else
                     return item
@@ -129,7 +129,7 @@ const Home = () => {
         .then((res) => res.json())
         .then((result) => {
             const newData = data.filter((item) => {
-                return item._id!==result._id
+                return item._id !== result._id
             })
             setData(newData)
         })
@@ -148,7 +148,7 @@ const Home = () => {
         .then((res) => res.json())
         .then((result) => {
             const newData = data.map((item) => {
-                if(item._id==result._id)
+                if(item._id === result._id)
                     return result
                 else
                     return item
