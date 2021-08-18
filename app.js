@@ -3,7 +3,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const path = require('path')
 const {MONGO_URI} = require('./config/keys')
-const app = express()
+const app = express();
 
 //////////////////////// db configuration /////////////////
 mongoose.connect(MONGO_URI,{useNewUrlParser: true,useUnifiedTopology: true})
