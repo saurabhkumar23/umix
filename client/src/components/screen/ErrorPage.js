@@ -4,7 +4,7 @@ const ErrorPage = () => {
     return (
         <section className="error-page">
             <h1>404 Error Page</h1>
-            <p>Sorry, This page doesn't exist</p>
+            <p>Sorry, This page doesn't exist....</p>
         </section>
     );
 }
