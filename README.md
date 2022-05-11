@@ -20,7 +20,15 @@ a social networking platform (Frontend + Backend) created with Reactjs and Nodej
 - Search for users based on usernames.
 - forgot password feature using email token.
 
+#### Database Schema 
 
+- users
+- posts
+
+#### External Utilities
+
+- cloudinary platform for cloud image upload.
+- sendgrid for dummy emails.
 
 
 
