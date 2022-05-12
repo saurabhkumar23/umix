@@ -1,7 +1,7 @@
 ## UMIX
 
 a social networking platform (Frontend + Backend) created with Reactjs and Nodejs.
-[CLICK FOR DEMO](https://drive.google.com/file/d/18geStmAhn9E7fB9Dm2fSFbr31kVXrxBg/view?usp=sharing)
+##### [CLICK FOR DEMO](https://drive.google.com/file/d/18geStmAhn9E7fB9Dm2fSFbr31kVXrxBg/view?usp=sharing)
 
 #### Features
 
