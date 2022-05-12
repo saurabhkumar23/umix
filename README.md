@@ -19,6 +19,8 @@ a social networking platform (Frontend + Backend) created with Reactjs and Nodej
 - proper Authentication
 - Search for users based on usernames.
 - forgot password feature using email token.
+- proper pagination.
+- fully responsive on all mobile sizes.
 
 #### Database Schema 
 
