@@ -24,7 +24,7 @@ const Routing = () => {
 
     // initial user configuration on App refresh
     useEffect(() => {
-        localStorage.clear();
+        // localStorage.clear();
         const user = JSON.parse(localStorage.getItem("user"))
         if(user){
             dispatch({type:"USER",payload:user})
